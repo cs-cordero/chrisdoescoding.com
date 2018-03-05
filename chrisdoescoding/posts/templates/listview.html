@@ -1,0 +1,17 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
+
+<h1>All Posts</h1>
+
+{% if published_posts %}
+    <ul>
+    {% for post in published_posts %}
+        <li>
+            <a href="/posts/{{ post.id }}/">
+                {{ post.publication_date }} {{ post.title }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

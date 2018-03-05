@@ -1,8 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.http import HttpResponseRedirect
 
 from chrisdoescoding.posts.models import Post
+
+import datetime
 
 
 class PostView(DetailView):
@@ -16,3 +18,25 @@ class PostView(DetailView):
             return self.render_to_response(context)
 
         return HttpResponseRedirect('/posts')
+
+
+class LatestPostView(DetailView):
+    model = Post
+    template_name = 'postview.html'
+
+    def get(self, request):
+        now = datetime.datetime.now()
+        self.object = Post.objects.filter(publication_date__lte=now) \
+                                  .order_by('-publication_date')[0]
+        #TODO: Handle case where no object is returned
+        context = self.get_context_data(object=self.object)
+        return self.render_to_response(context)
+
+
+class AllPostsView(ListView):
+    template_name = 'listview.html'
+    context_object_name = 'published_posts'
+
+    def get_queryset(self):
+        now = datetime.datetime.now()
+        return Post.objects.filter(publication_date__lte=now)
