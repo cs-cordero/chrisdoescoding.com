@@ -1,9 +1,20 @@
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'posts/reset.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'posts/base.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
 
-<h1>{{ post.title }}</h1>
+<div class="navbar-fixed"></div>
+<div class="navbar-body"></div>
+<div class="container">
+    <div class="content">
+        <h1>{{ post.title }}</h1>
 
-{% if error_message %}<p>strong>{{ error_message }</strong></p>{% endif %}
+        {% if error_message %}<p>strong>{{ error_message }</strong></p>{% endif %}
 
-<h3>{{ post.publication_date }}</h3>
-<p>{{ post.body }}</p>
+        <h3>{{ post.publication_date }}</h3>
+        <hr />
+        <div>
+            {{ markdown.html }}
+        </div>
+    </div>
+</div>

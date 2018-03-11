@@ -9,7 +9,7 @@
     align-content: start;
 }
 
-.sidebar-fixed {
+.navbar-fixed {
     position:fixed;
     background-color: blue;
     width: 950px;
@@ -19,7 +19,7 @@
     transform: translate(-50%, 0);
 }
 
-.sidebar-body {
+.navbar-body {
     position: relative;
     background-color: blue;
     width: 950px;
