@@ -3,6 +3,7 @@ from django.views.generic import DetailView, ListView
 from django.http import HttpResponseRedirect
 
 from chrisdoescoding.posts.models import Post
+from chrisdoescoding.posts.utils import MarkdownParser
 
 import datetime
 
@@ -25,11 +26,13 @@ class LatestPostView(DetailView):
     template_name = 'postview.html'
 
     def get(self, request):
-        now = datetime.datetime.now()
+        now = datetime.datetime.utcnow()
         self.object = Post.objects.filter(publication_date__lte=now) \
                                   .order_by('-publication_date')[0]
         #TODO: Handle case where no object is returned
         context = self.get_context_data(object=self.object)
+        with MarkdownParser(self.object.body) as markdown:
+            context.update({ 'markdown': markdown })
         return self.render_to_response(context)
 
 
