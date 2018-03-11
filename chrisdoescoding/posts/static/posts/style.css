@@ -1,3 +1,33 @@
-h1 {
-    background-color: green;
+.container {
+    min-height: 100%;
+
+    display: grid;
+    grid-template-columns: 1fr 1.7fr 1fr;
+    grid-template-areas: ". content .";
+    grid-gap: 15px;
+    justify-content: start;
+    align-content: start;
+}
+
+.sidebar-fixed {
+    position:fixed;
+    background-color: blue;
+    width: 950px;
+    height: 50px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.sidebar-body {
+    position: relative;
+    background-color: blue;
+    width: 950px;
+    height: 300px;
+    margin: 40px auto 0 auto;
+}
+
+.content {
+    margin-top: 15px;
+    grid-area: content;
 }
