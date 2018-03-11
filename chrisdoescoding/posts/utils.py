@@ -1,5 +1,6 @@
 from markdown import Markdown
 from mdx_gfm import GithubFlavoredMarkdownExtension
+from django.utils.safestring import mark_safe
 
 
 class MarkdownParser:
@@ -16,7 +17,7 @@ class MarkdownParser:
 
     def __init__(self, unparsed_text):
         self.unparsed_text = unparsed_text
-        self.html = self.markdown_parser.convert(unparsed_text)
+        self.html = mark_safe(self.markdown_parser.convert(unparsed_text))
 
     def __enter__(self):
         return self
