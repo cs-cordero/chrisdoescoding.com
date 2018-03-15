@@ -21,6 +21,7 @@ class BasePostView(DetailView):
             context.update({ 'markdown': markdown })
         return self.render_to_response(context)
 
+
 class LatestPostView(BasePostView):
     template_name = 'latest_post_view.html'
 
