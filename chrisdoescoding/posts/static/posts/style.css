@@ -1,3 +1,24 @@
+.navbar-scrolls-away {
+    position: relative;
+    background-color: blue;
+    width: 950px;
+    height: 300px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+.navbar {
+    position: sticky;
+    background-color: blue;
+    width: 950px;
+    height: 50px;
+    top: 0;
+    margin: 0 auto;
+    display: flex;
+    z-index: 3;
+    background-color: yellow;
+}
+
 .container {
     min-height: 100%;
 
@@ -9,25 +30,37 @@
     align-content: start;
 }
 
-.navbar-fixed {
-    position:fixed;
-    background-color: blue;
-    width: 950px;
-    height: 50px;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, 0);
-}
-
-.navbar-body {
-    position: relative;
-    background-color: blue;
-    width: 950px;
-    height: 300px;
-    margin: 40px auto 0 auto;
-}
-
 .content {
     margin-top: 15px;
     grid-area: content;
+    min-width: 600px;
+    z-index: 1;
+}
+
+#profile {
+    width: 280px;
+    height: 280px;
+    background-color: red;
+    z-index: 99;
+    position: fixed;
+    top: 25px;
+    right: calc(50% - (950px / 2) + 25px); // 50% of the screen, minus half the size of the navbar-scrolls-away
+}
+
+.button {
+    height: 50px;
+    margin-left: 10px;
+    z-index: 900;
+    top: 0;
+    cursor: pointer;
+    padding: 0 5px;
+    color: black;
+}
+
+.button i {
+    margin-top: 5px;
+}
+
+.button:hover {
+    background-color: green;
 }

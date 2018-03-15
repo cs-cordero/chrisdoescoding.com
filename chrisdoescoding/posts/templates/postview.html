@@ -1,10 +1,64 @@
+{% block extrahead %}
+    <script>
+        var profilePicture;
+        var navbar;
+        var navbarOriginalTop;
+        var heightOfNavbarFixedAndBody = 350;
+
+        function resizePicture() {
+            var scrollPosition = document.body.scrollTop;
+            var scrollMaxEffect = Math.min(heightOfNavbarFixedAndBody, scrollPosition);
+            var scaledSize = 1 - (scrollMaxEffect / heightOfNavbarFixedAndBody);
+            if (scrollPosition >= 400) {
+                if (profilePicture && profilePicture.style.width <= 50)
+                    return;
+            };
+
+            if (profilePicture) {
+                var size = Math.max((280 * scaledSize), 50) + 'px';
+                profilePicture.style.width = size;
+                profilePicture.style.height = size;
+                var topScale = Math.max(0, scaledSize - (50/280));
+                profilePicture.style.top = (25 * topScale) + 'px';
+            }
+
+        }
+
+        window.onload = function() {
+            profilePicture = document.getElementById('profile');
+            navbar = document.getElementById('navbar');
+            nvabarOriginalTop = navbar.style.top;
+            document.body.scrollTop = 0;
+        };
+
+        document.onscroll = resizePicture;
+    </script>
+{% endblock %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'posts/reset.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'posts/base.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 
-<div class="navbar-fixed"></div>
-<div class="navbar-body"></div>
+<div class="navbar-scrolls-away"></div>
+<div class="navbar" id='navbar'>
+    <a href="/">
+        <div class="button"><i class="fas fa-home fa-2x"></i></div>
+    </a>
+    <a href="/posts">
+        <div class="button"><i class="fas fa-list-ul fa-2x"></i></div>
+    </a>
+    <a href="https://github.com/cs-cordero">
+        <div class="button"><i class="fab fa-github fa-2x"></i></div>
+    </a>
+    <a href="https://www.linkedin.com/in/cs-cordero">
+        <div class="button"><i class="fab fa-linkedin fa-2x"></i></div>
+    </a>
+    <a href="#">
+        <div class="button"><i class="far fa-envelope fa-2x"></i></div>
+    </a>
+</div>
+<div id="profile"></div>
 <div class="container">
     <div class="content">
         <h1>{{ post.title }}</h1>
