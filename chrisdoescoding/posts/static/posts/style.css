@@ -70,3 +70,18 @@
 .button:hover {
     background-color: green;
 }
+
+.all-posts {
+    display: flex;
+    flex-direction: column;
+}
+
+.all-posts a { text-decoration: none; }
+.all-posts-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 25px;
+}
+.all-posts-item:nth-child(odd) { background-color: #ebf2f9; }
+.all-posts-item:hover { background-color: #d9ebfe; }
