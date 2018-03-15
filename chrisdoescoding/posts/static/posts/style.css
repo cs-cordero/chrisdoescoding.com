@@ -37,7 +37,7 @@
     z-index: 1;
 }
 
-#profile {
+.profile, .profile-static {
     width: 280px;
     height: 280px;
     background-color: red;
@@ -45,6 +45,12 @@
     position: fixed;
     top: 25px;
     right: calc(50% - (950px / 2) + 25px); // 50% of the screen, minus half the size of the navbar-scrolls-away
+}
+
+.profile-static {
+    width: 50;
+    height: 50;
+    top: 0;
 }
 
 .button {

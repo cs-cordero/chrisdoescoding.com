@@ -1,0 +1,34 @@
+{% block extrahead %}
+{% endblock %}
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'posts/reset.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'posts/base.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
+<link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
+
+{% block scroll-away %}
+{% endblock %}
+<div class="navbar" id='navbar'>
+    <a href="/">
+        <div class="button"><i class="fas fa-home fa-2x"></i></div>
+    </a>
+    <a href="/posts">
+        <div class="button"><i class="fas fa-list-ul fa-2x"></i></div>
+    </a>
+    <a href="https://github.com/cs-cordero">
+        <div class="button"><i class="fab fa-github fa-2x"></i></div>
+    </a>
+    <a href="https://www.linkedin.com/in/cs-cordero">
+        <div class="button"><i class="fab fa-linkedin fa-2x"></i></div>
+    </a>
+    <a href="#">
+        <div class="button"><i class="far fa-envelope fa-2x"></i></div>
+    </a>
+</div>
+{% block profile %}
+{% endblock %}
+<div class="container">
+    {% block content %}
+    {% endblock %}
+</div>
