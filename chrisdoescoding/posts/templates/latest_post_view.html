@@ -7,6 +7,13 @@
         var heightOfNavbarFixedAndBody = 350;
 
         function resizePicture() {
+            var mq = window.matchMedia("(max-width: 950px)");
+            if (mq.matches) {
+                profilePicture.style.width = '280px';
+                profilePicture.style.height = '280px';
+                profilePicture.style.top = '25px';
+                return;
+            }
             var scrollPosition = document.body.scrollTop;
             var scrollMaxEffect = Math.min(heightOfNavbarFixedAndBody, scrollPosition);
             var scaledSize = 1 - (scrollMaxEffect / heightOfNavbarFixedAndBody);
@@ -32,11 +39,21 @@
         };
 
         document.onscroll = resizePicture;
+        window.addEventListener("orientationchange", function() {
+            alert(document.body.scrollTop);
+            resizePicture();
+        })
     </script>
 {% endblock %}
 
 {% block scroll-away %}
-<div class="navbar-scrolls-away"></div>
+<div class="navbar-scrolls-away">
+    <div class="navbar-content">
+        <h3>Hi!</h3>
+        <h5>Thanks for dropping by.</h5>
+        <p>My name is Chris and I'm a Software Developer for the New York Stock Exchange.  This blog is where I post my thoughts on random topics related to the software industry.</p>
+    </div>
+</div>
 {% endblock %}
 
 {% block profile %}
