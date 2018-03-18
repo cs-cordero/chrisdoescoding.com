@@ -1,19 +1,12 @@
 {% extends 'base.html' %}
 
-{% block profile %}
-<div class="profile-static" id="profile">
-    {% load static %}
-    <img src="{% static 'posts/headshot_chris.jpg' %}" />
-</div>
-{% endblock %}
-
 {% block content %}
     <div class="content">
         <h1>{{ post.title }}</h1>
 
         {% if error_message %}<p>strong>{{ error_message }</strong></p>{% endif %}
 
-        <h3>{{ post.publication_date }}</h3>
+        <h3>{{ post.publication_date|date:"M d, Y" }}</h3>
         <hr />
         <div>
             {{ markdown.html }}

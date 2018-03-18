@@ -23,7 +23,7 @@ class BasePostView(DetailView):
 
 
 class LatestPostView(BasePostView):
-    template_name = 'latest_post_view.html'
+    template_name = 'single_post_view.html'
 
     def get_object(self):
         return self.get_queryset().latest('publication_date')
