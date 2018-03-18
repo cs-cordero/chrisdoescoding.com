@@ -57,7 +57,10 @@
 {% endblock %}
 
 {% block profile %}
-<div class="profile" id="profile"></div>
+<div class="profile" id="profile">
+    {% load static %}
+    <img src="{% static 'posts/headshot_chris.jpg' %}" />
+</div>
 {% endblock %}
 
 {% block content %}

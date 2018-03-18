@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block profile %}
-<div class="profile-static" id="profile"></div>
+<div class="profile-static" id="profile">
+    {% load static %}
+    <img src="{% static 'posts/headshot_chris.jpg' %}" />
+</div>
 {% endblock %}
 
 {% block content %}
