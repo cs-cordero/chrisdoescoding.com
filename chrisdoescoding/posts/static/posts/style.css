@@ -117,8 +117,9 @@ body {
 
 .navfooter--item-outer { font-size: 3rem; }
 .navfooter--item-inner { font-size: 2rem; }
-.navfooter--item-outer:hover { font-size: 3.5rem; }
-.navfooter--item-inner:hover { font-size: 2.5rem; }
+.navfooter--item-outer-active:hover { font-size: 3.5rem; }
+.navfooter--item-inner-active:hover { font-size: 2.5rem; }
+.navfooter--item-disabled { color: gray; cursor: unset; }
 
 .footer {
     width: 100%;
