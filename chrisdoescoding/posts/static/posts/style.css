@@ -71,6 +71,7 @@ body {
 .content {
     width: 80%;
     margin-top: 25px;
+    flex-grow: 1;
 }
 
 .all-posts {
