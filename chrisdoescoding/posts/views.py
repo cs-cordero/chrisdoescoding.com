@@ -13,7 +13,11 @@ import random
 
 class BasePostView(DetailView):
     model = Post
-    queryset = Post.objects.filter(publication_date__lte=timezone.now())
+
+    def get_queryset(self):
+        self.queryset = Post.objects.filter(publication_date__lte=timezone.now()) \
+                                    .filter(hide=False)
+        return self.queryset
 
     def get(self, request, *args, **kwargs):
         # find the post
@@ -73,15 +77,17 @@ class PostView(BasePostView):
 class AllPostsView(ListView):
     template_name = 'all_posts_view.html'
     context_object_name = 'published_posts'
-    queryset = Post.objects.filter(publication_date__lte=timezone.now())
+
+    def get_queryset(self):
+        self.queryset = Post.objects.filter(publication_date__lte=timezone.now()) \
+                                    .filter(hide=False)
+        return self.queryset
 
 
 class RandomPostView(RedirectView):
-    queryset = Post.objects.filter(publication_date__lte=timezone.now())
-
     def get_queryset(self):
-        if not self.queryset:
-            self.queryset = Posts.objects.all()
+        self.queryset = Post.objects.filter(publication_date__lte=timezone.now()) \
+                                    .filter(hide=False)
         return self.queryset
 
     def get_redirect_url(self, *args, **kwargs):
