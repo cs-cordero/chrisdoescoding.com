@@ -14,46 +14,46 @@
     </div>
     <div class="navfooter">
         {% if previous_post %}
-            <div class="navfooter--item
-                        navfooter--item-outer
-                        navfooter--item-outer-active">
+            <div class="nav--item
+                        nav--item-outer
+                        nav--item-outer-active">
                 <a href="/posts/{{ previous_post }}">
                     <i class="fas fa-angle-double-left"></i>
                 </a>
             </div>
         {% else %}
-            <div class="navfooter--item
-                        navfooter--item-outer
-                        navfooter--item-disabled">
+            <div class="nav--item
+                        nav--item-outer
+                        nav--item-disabled">
                 <i class="fas fa-angle-double-left"></i>
             </div>
         {% endif %}
-        <div class="navfooter--item
-                    navfooter--item-inner
-                    navfooter--item-inner-active">
+        <div class="nav--item
+                    nav--item-inner
+                    nav--item-inner-active">
             <a href="#">
                 <i class="fas fa-angle-double-up"></i>
             </a>
         </div>
-        <div class="navfooter--item
-                    navfooter--item-inner
-                    navfooter--item-inner-active">
+        <div class="nav--item
+                    nav--item-inner
+                    nav--item-inner-active">
             <a href="/posts/random/">
                 <i class="fas fa-random"></i>
             </a>
         </div>
         {% if next_post %}
-            <div class="navfooter--item
-                        navfooter--item-outer
-                        navfooter--item-outer-active">
+            <div class="nav--item
+                        nav--item-outer
+                        nav--item-outer-active">
                 <a href="/posts/{{ next_post }}">
                     <i class="fas fa-angle-double-right"></i>
                 </a>
             </div>
         {% else %}
-            <div class="navfooter--item
-                        navfooter--item-outer
-                        navfooter--item-disabled">
+            <div class="nav--item
+                        nav--item-outer
+                        nav--item-disabled">
                 <i class="fas fa-angle-double-right disabled"></i>
             </div>
         {% endif %}
