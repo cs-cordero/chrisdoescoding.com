@@ -1,2 +1,2 @@
-export PYTHONPATH=$(pwd)
+export PYTHONPATH=$(pwd)/chrisdoescoding:$(pwd)
 export DJANGO_SETTINGS_MODULE='config.settings.local'
