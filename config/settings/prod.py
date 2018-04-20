@@ -3,7 +3,13 @@ from .common import *
 import os
 
 DEBUG = False
-SECRET_KEY = os.environ.get('SECRET_KEY')
+
+try:
+    with open(os.path.join(BASE_DIR, 'secret'), 'r') as f:
+        SECRET_KEY = f.read()
+except FileNotFoundError:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
