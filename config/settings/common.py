@@ -1,5 +1,7 @@
 import os
 
+BASE_DIR = os.path.abspath(os.path.join(__file__, '..', '..', '..'))
+
 INSTALLED_APPS = [
     'chrisdoescoding.posts',
     'django.contrib.admin',
@@ -64,4 +66,5 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
