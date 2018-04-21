@@ -21,7 +21,7 @@ ALLOWED_HOSTS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'cs-cordero',
+        'NAME': os.environ.get('DATABASE'),
     }
 }
 
