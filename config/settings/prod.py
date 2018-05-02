@@ -1,3 +1,4 @@
+from django.core.exceptions import ImproperlyConfigured
 from .common import *
 
 import os
@@ -18,12 +19,16 @@ ALLOWED_HOSTS = [
     'www.chrisdoescoding.com'
 ]
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DATABASE'),
     }
 }
+
+if not DATABASES['default']['NAME']:
+    raise ImproperlyConfigured('Missing DATABASE environment variable')
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
