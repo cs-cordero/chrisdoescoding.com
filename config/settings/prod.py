@@ -15,6 +15,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     '[::1]',
+    '45.56.107.251',
     'chrisdoescoding.com',
     'www.chrisdoescoding.com'
 ]
