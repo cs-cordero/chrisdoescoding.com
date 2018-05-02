@@ -34,8 +34,8 @@ done
 export PYTHONPATH=$ROOT:$ROOT/chrisdoescoding
 if [[ $PROD_MODE = 1 ]]; then
     export DJANGO_SETTINGS_MODULE='config.settings.prod'
-    gunicorn chrisdoescoding.wsgi
+    gunicorn chrisdoescoding.wsgi --bind=unix:/tmp/gunicorn.sock
 else
     export DJANGO_SETTINGS_MODULE='config.settings.local'
-    python $ROOT/chrisdoescoding/manage.py runserver
+    gunicorn chrisdoescoding.wsgi
 fi
