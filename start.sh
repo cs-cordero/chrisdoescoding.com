@@ -31,7 +31,7 @@ while test $# -gt 0; do
 done
 
 
-export PYTHONPATH=$ROOT
+export PYTHONPATH=$ROOT:$ROOT/chrisdoescoding
 if [[ $PROD_MODE = 1 ]]; then
     export DJANGO_SETTINGS_MODULE='config.settings.prod'
     gunicorn chrisdoescoding.wsgi
