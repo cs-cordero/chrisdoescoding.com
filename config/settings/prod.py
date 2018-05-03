@@ -21,16 +21,26 @@ ALLOWED_HOSTS = [
 ]
 
 
+try:
+    with open(os.path.join(BASE_DIR, 'database'), 'r') as f:
+        _DATABASE = f.read()
+except FileNotFoundError:
+    _DATABASE = os.environ.get('DATABASE')
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DATABASE'),
+        'NAME': _DATABASE,
     }
 }
 
 if not DATABASES['default']['NAME']:
     raise ImproperlyConfigured('Missing DATABASE environment variable')
+del _DATABASE
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
