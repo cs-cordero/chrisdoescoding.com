@@ -1,6 +1,15 @@
-# run with source and in the appropriate directory
+# run with `source` command and in the base directory
+#
+# Example:
+# $ cd path/to/chrisdoescoding/root
+# $ . start_prod
+#   # OR
+# $ source start_prod
+#
+
 export PYTHONPATH=$(pwd):$(pwd)/chrisdoescoding
 export DJANGO_SETTINGS_MODULE='config.settings.prod'
+
 if [ ! -f database ] && [ -z $DATABASE ]; then
     echo 'Error: No DATABASE variable set!'
     return
@@ -9,8 +18,10 @@ if [ ! -f secret ] && [ -z $SECRET_KEY ]; then
     echo 'Error: No SECRET_KEY found!'
     return
 fi
+
 python chrisdoescoding/manage.py migrate
 python chrisdoescoding/manage.py check
 RETURN_CODE=$?
 [[ ! $RETURN_CODE = 0 ]] && exit $RETURN_CODE
+
 gunicorn chrisdoescoding.wsgi --bind=unix:/tmp/gunicorn.sock --daemon

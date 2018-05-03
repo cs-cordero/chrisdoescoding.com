@@ -21,7 +21,7 @@ while test $# -gt 0; do
             help
             ;;
         -d|--dev)
-            DEV_MODE=1
+            NO_GUNICORN=1
             shift
             ;;
         *)
@@ -32,10 +32,9 @@ done
 
 
 export PYTHONPATH=$ROOT:$ROOT/chrisdoescoding
-if [[ $DEV_MODE = 0 ]]; then
-    export DJANGO_SETTINGS_MODULE='config.settings.local'
+export DJANGO_SETTINGS_MODULE='config.settings.local'
+if [[ $NO_GUNICORN = 0 ]]; then
     gunicorn chrisdoescoding.wsgi
 else
-    export DJANGO_SETTINGS_MODULE='config.settings.local'
     python chrisdoescoding/manage.py runserver
 fi
