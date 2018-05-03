@@ -16,7 +16,7 @@ SCPDESTINATION="$1:~/mounting_point"
 # Collect all static files into a static/ directory
 ###############################################################################
 
-DJANGO_SETTINGS_MODULE='config.settings.prod'
+DJANGO_SETTINGS_MODULE='config.settings.local'
 PYTHONPATH="$SCRIPTPATH/chrisdoescoding:$SCRIPTPATH"
 python chrisdoescoding/manage.py collectstatic --noinput
 

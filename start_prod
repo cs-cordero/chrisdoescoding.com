@@ -1,0 +1,12 @@
+# run with source and in the appropriate directory
+export PYTHONPATH=$(pwd):$(pwd)/chrisdoescoding
+export DJANGO_SETTINGS_MODULE='config.settings.prod'
+if [ -z $DATABASE ]; then
+    echo 'Error: No DATABASE variable set!'
+    return
+fi
+if [ ! -f secret ] && [ -z $SECRET_KEY ]; then
+    echo 'Error: No SECRET_KEY found!'
+    return
+fi
+gunicorn chrisdoescoding.wsgi --bind=unix:/tmp/gunicorn.sock --daemon
