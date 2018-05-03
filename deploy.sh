@@ -1,40 +1,79 @@
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
+SCPDESTINATION="$1:~/mounting_point"
 
-export DJANGO_SETTINGS_MODULE='config.settings.prod'
-export PYTHONPATH="$SCRIPTPATH/chrisdoescoding:$SCRIPTPATH"
+[ -z "$1" ] && echo 'Need a destination <username>@<ip_address>.' && exit
 
-# Clear the static and dist directories
+
+###############################################################################
+# Clear the static/ and dist/ directories
+###############################################################################
+
 [ -d dist/ ] && rm -rf dist
 [ -d static/ ] && rm -rf static
 
-# Collect the Static Files
+
+###############################################################################
+# Collect all static files into a static/ directory
+###############################################################################
+
+DJANGO_SETTINGS_MODULE='config.settings.prod'
+PYTHONPATH="$SCRIPTPATH/chrisdoescoding:$SCRIPTPATH"
 python chrisdoescoding/manage.py collectstatic --noinput
 
-# Throw things into the dist directory
-mkdir dist
 
-# includes all project files, excluding:
-#       dist/ folder
-#       __pycache__/ folders
-#       .pyc files
-#       internal /static/ folders
-zip -r dist/chrisdoescoding.zip ./ -D -x dist/** __pycache__/** **/*.pyc *.git* chrisdoescoding/**/static/**
+###############################################################################
+# Create Temp Directory
+###############################################################################
 
-# pre-made secret_key
+TEMPDIR=$(mktemp -d)
+mkdir $TEMPDIR/chrisdoescoding
+
+
+###############################################################################
+# Zip the Project to the Temp Directory
+###############################################################################
+
+zip -r $TEMPDIR/chrisdoescoding/chrisdoescoding.zip ./ \
+    -D \
+    -x \
+        dist/** \
+        **/__pycache__/** \
+        **/*.pyc \
+        *.git* \
+        chrisdoescoding/**/static/**
+
+
+###############################################################################
+# Create Secret Key in Temp Directory
+###############################################################################
+
 SECRET_KEY_CHARS='abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
 unset SECRET_KEY
 for i in {1..50} ; do
     SECRET_KEY="$SECRET_KEY${SECRET_KEY_CHARS:RANDOM%${#SECRET_KEY_CHARS}:1}"
 done
-echo $SECRET_KEY > dist/secret
+echo $SECRET_KEY > $TEMPDIR/chrisdoescoding/secret
 
-# nginx config
-cp /etc/nginx/nginx.conf dist/nginx.conf
 
-# give success message
-echo
-echo
-echo "created static/"
-echo "created dist/chrisdoescoding.zip"
-echo "created dist/secret"
-echo "created dist/nginx.conf"
+###############################################################################
+# Copy the Nginx.conf to the Temp Directory
+###############################################################################
+
+cp /etc/nginx/nginx.conf $TEMPDIR/chrisdoescoding/nginx.conf
+
+
+###############################################################################
+# Create the dist/ directory and zip the Temp Directory into it
+###############################################################################
+
+mkdir dist
+OUTNAME="$(pwd)/dist/$(date +%Y%m%d-%s)-chrisdoescoding.zip"
+cd $TEMPDIR
+zip $OUTNAME ./chrisdoescoding/*
+
+
+###############################################################################
+# Finally SCP the file to the server
+###############################################################################
+
+scp $OUTNAME $SCPDESTINATION

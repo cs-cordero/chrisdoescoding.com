@@ -42,7 +42,7 @@ done
 export PYTHONPATH=$ROOT:$ROOT/chrisdoescoding
 if [[ $PROD_MODE = 1 ]]; then
     export DJANGO_SETTINGS_MODULE='config.settings.prod'
-    gunicorn chrisdoescoding.wsgi --bind=unix:/tmp/gunicorn.sock
+    gunicorn chrisdoescoding.wsgi --bind=unix:/tmp/gunicorn.sock --daemon
 elif [[ $DEV_MODE = 0 ]]; then
     export DJANGO_SETTINGS_MODULE='config.settings.local'
     gunicorn chrisdoescoding.wsgi
