@@ -33,7 +33,7 @@ mkdir $TEMPDIR/chrisdoescoding
 # Zip the Project to the Temp Directory
 ###############################################################################
 
-zip -r $TEMPDIR/chrisdoescoding/chrisdoescoding.zip ./ \
+zip -r $TEMPDIR/chrisdoescoding/chrisdoescoding.zip ./ ./static \
     -D \
     -x \
         dist/** \
