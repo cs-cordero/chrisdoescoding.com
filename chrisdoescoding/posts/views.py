@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.template.loader import render_to_string
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.base import RedirectView
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 
@@ -9,6 +8,7 @@ from chrisdoescoding.posts.utils import MarkdownParser
 
 from django.utils import timezone
 
+import json
 import random
 
 
@@ -98,6 +98,20 @@ class RandomPostView(RedirectView):
         return f'/posts/{post_id}'
 
 
-def south_park_view(request):
-    rendered = render_to_string('southpark.html')
-    return HttpResponse(rendered)
+class SouthParkView(TemplateView):
+    template_name = 'southpark.html'
+
+
+class SouthParkRedirectView(RedirectView):
+    permanent = False
+    query_string = False
+
+    with open('chrisdoescoding/posts/scripts/southpark.json', 'r') as f:
+        data = json.loads(f.read())
+
+    south_park_ids = list({episode.get('id') for episode in data})
+
+    def get_redirect_url(self, *args, **kwargs):
+        count_ids = len(self.south_park_ids)
+        sp_id = self.south_park_ids[random.randint(0, count_ids+1)]
+        return f'https://hulu.com/watch/{sp_id}'
