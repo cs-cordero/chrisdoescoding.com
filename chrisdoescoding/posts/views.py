@@ -8,7 +8,6 @@ from chrisdoescoding.posts.utils import MarkdownParser
 
 from django.utils import timezone
 
-import json
 import random
 
 
@@ -96,22 +95,3 @@ class RandomPostView(RedirectView):
         random_selection = random.randint(0, len(published_posts)-1)
         post_id = published_posts[random_selection].id
         return f'/posts/{post_id}'
-
-
-class SouthParkView(TemplateView):
-    template_name = 'southpark.html'
-
-
-class SouthParkRedirectView(RedirectView):
-    permanent = False
-    query_string = False
-
-    with open('chrisdoescoding/posts/scripts/southpark.json', 'r') as f:
-        data = json.loads(f.read())
-
-    south_park_ids = list({episode.get('id') for episode in data})
-
-    def get_redirect_url(self, *args, **kwargs):
-        count_ids = len(self.south_park_ids)
-        sp_id = self.south_park_ids[random.randint(0, count_ids+1)]
-        return f'https://hulu.com/watch/{sp_id}'

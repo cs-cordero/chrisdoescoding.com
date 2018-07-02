@@ -4,6 +4,7 @@ BASE_DIR = os.path.abspath(os.path.join(__file__, '..', '..', '..'))
 
 INSTALLED_APPS = [
     'chrisdoescoding.posts',
+    'chrisdoescoding.southpark',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
