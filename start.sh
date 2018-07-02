@@ -6,8 +6,8 @@ function help {
     echo "$0 [options]"
     echo
     echo "Options:"
-    echo "-h, --help            show brief help"
-    echo "-nog, --no-gunicorn   run in dev mode, without gunicorn"
+    echo "-h, --help  show brief help"
+    echo "-d, --dev   run in dev mode, without gunicorn"
     echo
     echo
     exit 0
