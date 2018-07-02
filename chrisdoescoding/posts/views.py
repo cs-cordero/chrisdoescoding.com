@@ -1,7 +1,8 @@
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import RedirectView
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 
 from chrisdoescoding.posts.models import Post
 from chrisdoescoding.posts.utils import MarkdownParser
@@ -95,3 +96,8 @@ class RandomPostView(RedirectView):
         random_selection = random.randint(0, len(published_posts)-1)
         post_id = published_posts[random_selection].id
         return f'/posts/{post_id}'
+
+
+def south_park_view(request):
+    rendered = render_to_string('southpark.html')
+    return HttpResponse(rendered)
