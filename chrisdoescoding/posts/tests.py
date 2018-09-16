@@ -94,5 +94,5 @@ class TestView(TestCase):
             context = response.context
             expected_prev, expected_next = expected
             actual_prev, actual_next = context['previous_post'], context['next_post']
-            self.assertEqual(actual_prev, expected_prev)
-            self.assertEqual(actual_next, expected_next)
+            self.assertEqual(actual_prev.pk if actual_prev else actual_prev, expected_prev)
+            self.assertEqual(actual_next.pk if actual_next else actual_next, expected_next)
