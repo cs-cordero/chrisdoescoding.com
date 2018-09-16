@@ -38,7 +38,7 @@ body {
     width: auto;
     height: 100%;
     display: flex;
-    padding: 0 7px;
+    padding: 0 15px;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
