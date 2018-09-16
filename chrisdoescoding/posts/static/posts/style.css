@@ -65,12 +65,10 @@ body {
     margin-top: 65px;
 }
 .bumper-left {
-    background-color: yellow;
     background-color: #f8f8f8;
     flex: 0 1 100%;
 }
 .bumper-right {
-    background-color: green;
     background-color: #f8f8f8;
     flex: 0 1 100%;
 }
