@@ -90,12 +90,50 @@ body {
     flex: 0 1 100%;
 }
 
+.navigation {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 35px 35px 0 35px;
+}
+.navigation-item {
+    max-width: 240px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.navigation-item > span:last-child {
+    font-family: "Lora", serif;
+    font-size: 0.85em;
+}
+.navigation > a {
+    text-decoration: none;
+    color: black;
+}
+.navigation > a:hover {
+    color: #29189c;
+}
+.navigation-item-left {
+    text-align: left;
+    padding-left: 10px;
+    border-left: 5px solid gray;
+}
+.navigation-item-left:hover { border-color: #29189c; }
+.navigation-item-right {
+    text-align: right;
+    padding-right: 10px;
+    border-right: 5px solid gray;
+}
+.navigation-item-right:hover { border-color: #29189c; }
+
 @media all and (max-width: 1000px) {
     .header { justify-content: center; }
 }
 
 @media all and (max-width: 650px) {
     .content { flex: 0 1 auto; width: 100%;}
+    .navigation { flex: 0 1 auto; width: 100%;}
     .bumper-left { flex-basis: 0; }
     .bumper-right { flex-basis: 0; }
 }

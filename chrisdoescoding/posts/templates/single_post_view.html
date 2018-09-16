@@ -28,6 +28,34 @@ biltong. Frankfurter porchetta ham t-bone rump cupim tri-tip capicola
 kevin short loin ham hock. Frankfurter beef ribs bresaola kielbasa pork
 loin. Capicola kevin boudin turkey hamburger jowl.
         </pre>
+        <div class="navigation">
+            {% if previous_post %}
+                <a href="/posts/{{ previous_post }}">
+                    <div class="navigation-item navigation-item-left navigation-item-active">
+                        <span>Previous Post</span><br/>
+                        <span>Title of Post</span>
+                    </div>
+                </a>
+            {% else %}
+                <div class="navigation-item navigation-item-left navigation-item-disabled">
+                    <span>Previous Post</span><br/>
+                    <span>---</span>
+                </div>
+            {% endif %}
+            {% if next_post %}
+                <a href="/posts/{{ next_post }}">
+                    <div class="navigation-item navigation-item-right navigation-item-active">
+                        <span>Next Post</span><br/>
+                        <span>Title of Post</span>
+                    </div>
+                </a>
+            {% else %}
+                <div class="navigation-item navigation-item-right navigation-item-disabled">
+                    <span>Next Post</span><br/>
+                    <span>---</span>
+                </div>
+            {% endif %}
+        </div>
     </div>
     <div class="bumper-right">
     </div>
