@@ -1,22 +1,26 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-@import url('https://fonts.googleapis.com/css?family=Inconsolata');
-@import url('https://fonts.googleapis.com/css?family=Fira+Mono');
+@import url('https://fonts.googleapis.com/css?family=Lora:400i|Montserrat|Muli|Inconsolata');
 
 html { height: 100%; min-height: 100%; }
 body {
     height: 100%;
     min-height: 100%;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Muli', sans-serif;
     font-size: 18px;
     line-height: 1.3em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merriweather', serif;
     overflow-wrap: break-word;
     margin-bottom: 15px;
     line-height: 1.3em;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
 }
 
 h1 { font-size: 48px; font-weight: bold; margin-bottom: unset; }
@@ -47,7 +51,7 @@ blockquote {
 }
 
 blockquote, blockquote p {
-    font-family: 'Merriweather', serif;
+    font-family: 'Lora', serif;
 }
 
 code {
@@ -58,6 +62,7 @@ code {
 }
 
 pre {
+    font-family: 'Inconsolata', monospace;
     margin: 1em 2em;
     background-color: #F8B0B066;
     font-size: 17px;
@@ -67,7 +72,11 @@ pre {
     white-space: pre;
 }
 
-pre code { padding: unset; background-color: unset; }
+pre code {
+    font-family: 'Inconsolata', monospace;
+    padding: unset;
+    background-color: unset;
+}
 
 table {
     table-layout: auto;

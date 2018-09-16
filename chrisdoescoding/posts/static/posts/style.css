@@ -16,7 +16,7 @@ body {
 .header {
     width: 100%;
     position: fixed;
-    background-color: red;
+    background-color: white;
     height: 65px;
     flex: 0 0 100%;
 }
@@ -31,7 +31,6 @@ body {
 }
 
 .content {
-    background-color: blue;
     width: 650px;
     flex: 0 0 auto;
     padding: 2rem 1rem;
