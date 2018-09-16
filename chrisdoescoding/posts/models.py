@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 
+from . import utils
+
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     body = models.TextField()
@@ -16,10 +18,12 @@ class Post(models.Model):
 
     @property
     def excerpt(self):
-        # TODO: Check if this works when the body is filled with markdown...
-        # it probably won't :(
         excerpt_length = settings.LISTVIEW_EXCERPT_LENGTH
-        return (
-            f'{self.body[:excerpt_length]}...'
-            if len(self.body) > excerpt_length else self.body
-        )
+
+        markdown_body = utils.MarkdownParser(self.body).html
+        first_p_tag_open = markdown_body.find('<p>')
+        first_p_tag_close = markdown_body.find('</p>')
+
+        if first_p_tag_open >= 0 and first_p_tag_close >= 0:
+            return markdown_body[first_p_tag_open+3:first_p_tag_close][:excerpt_length]
+        return ''
