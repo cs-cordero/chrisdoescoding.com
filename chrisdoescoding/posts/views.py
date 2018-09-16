@@ -61,7 +61,7 @@ class BasePostView(DetailView):
 
 
 class LatestPostView(BasePostView):
-    template_name = 'single_post_view.html'
+    template_name = 'detail_view.html'
 
     def get_object(self):
         try:
@@ -71,11 +71,11 @@ class LatestPostView(BasePostView):
 
 
 class PostView(BasePostView):
-    template_name = 'single_post_view.html'
+    template_name = 'detail_view.html'
 
 
 class AllPostsView(ListView):
-    template_name = 'all_posts_view.html'
+    template_name = 'list_view.html'
     context_object_name = 'published_posts'
 
     def get_queryset(self):

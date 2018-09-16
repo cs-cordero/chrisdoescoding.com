@@ -57,7 +57,7 @@ class TestView(TestCase):
         self.assertRedirects(response, '/posts/latest/')
         self.assertContains(response, self.post_4.title)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'single_post_view.html')
+        self.assertTemplateUsed(response, 'detail_view.html')
 
     def test_get_post_requested(self):
         """ posts should work as intended """
@@ -66,7 +66,7 @@ class TestView(TestCase):
             response = self.client.get(f'/posts/{published_post.id}/')
             self.assertContains(response, published_post.title)
             self.assertEqual(response.status_code, 200)
-            self.assertTemplateUsed(response, 'single_post_view.html')
+            self.assertTemplateUsed(response, 'detail_view.html')
 
     @patch('chrisdoescoding.posts.views.MarkdownParser')
     def test_uses_markdownparser(self, mock_mp):
@@ -79,7 +79,7 @@ class TestView(TestCase):
             self.assertContains(response, published_post.title)
             self.assertContains(response, FakeMarkdownParser.html)
             self.assertEqual(response.status_code, 200)
-            self.assertTemplateUsed(response, 'single_post_view.html')
+            self.assertTemplateUsed(response, 'detail_view.html')
 
     def test_sets_next_prev_ids_in_context(self):
         """ should accurately get the next or previous post """

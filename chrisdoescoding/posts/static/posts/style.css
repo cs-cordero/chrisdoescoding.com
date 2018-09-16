@@ -105,6 +105,10 @@ body {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+.navigation-item-disabled {
+    width: 240px;
+    border: none !important;
+}
 .navigation-item > span:last-child {
     font-family: "Lora", serif;
     font-size: 0.85em;
@@ -128,6 +132,7 @@ body {
     border-right: 5px solid gray;
 }
 .navigation-item-active:hover { border-color: #29189c; }
+
 
 .post-listview > a {
     text-decoration: none;

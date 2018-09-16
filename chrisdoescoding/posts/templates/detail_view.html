@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_view.html' %}
 
 {% block content %}
     <div class="bumper-left">
@@ -38,8 +38,6 @@ loin. Capicola kevin boudin turkey hamburger jowl.
                 </a>
             {% else %}
                 <div class="navigation-item navigation-item-left navigation-item-disabled">
-                    <span>Previous Post</span><br/>
-                    <span>---</span>
                 </div>
             {% endif %}
             {% if next_post %}
@@ -51,8 +49,6 @@ loin. Capicola kevin boudin turkey hamburger jowl.
                 </a>
             {% else %}
                 <div class="navigation-item navigation-item-right navigation-item-disabled">
-                    <span>Next Post</span><br/>
-                    <span>---</span>
                 </div>
             {% endif %}
         </div>
