@@ -37,26 +37,26 @@ class BasePostView(DetailView):
         reference_time = current.publication_date
         published_posts = self.get_queryset()
 
-        previous_post_id = None
-        next_post_id = None
         try:
-            previous_post_id = published_posts \
-                                .filter(publication_date__lt=reference_time) \
-                                .latest('publication_date') \
-                                .id
+            previous_post = (
+                published_posts
+                    .filter(publication_date__lt=reference_time)
+                    .latest('publication_date')
+            )
         except Post.DoesNotExist:
-            pass
+            previous_post = None
         try:
-            next_post_id = published_posts \
-                            .filter(publication_date__gt=reference_time) \
-                            .earliest('publication_date') \
-                            .id
+            next_post = (
+                published_posts
+                    .filter(publication_date__gt=reference_time)
+                    .earliest('publication_date')
+            )
         except Post.DoesNotExist:
-            pass
+            next_post = None
 
         return {
-            'previous_post': previous_post_id,
-            'next_post': next_post_id
+            'previous_post': previous_post,
+            'next_post': next_post,
         }
 
 

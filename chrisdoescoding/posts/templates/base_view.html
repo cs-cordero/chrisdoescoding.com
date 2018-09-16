@@ -7,53 +7,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
 
 <div class="container">
-    <div class="header">
-        <a href="/">
-            <div class="header-button">
-                <div class="header-button-label">
-                    CHRISDOESCODING
-                </div>
-            </div>
-        </a>
-        <a href="/">
-            <div class="header-button">
-                <div class="header-button-label">
-                    LATEST
-                </div>
-            </div>
-        </a>
-        <a href="/posts">
-            <div class="header-button">
-                <div class="header-button-label">
-                    POSTS
-                </div>
-            </div>
-        </a>
-        <a href="mailto:chris@chrisdoescoding.com">
-            <div class="header-button">
-                <div class="header-button-label">
-                    CONTACT
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="main">
-        {% block content %}
-        {% endblock %}
-    </div>
-    <div class="footer">
-        <a href="https://www.linkedin.com/in/cs-cordero">
-            LinkedIn
-        </a>
-        <a href="https://github.com/cs-cordero">
-            GitHub
-        </a>
-        <a href="https://github.com/cs-cordero/blog">
-            Source
-        </a>
-        <p class="footer-disclaimer">
-            All opinions and blog posts herein are my own and do not reflect
-            the views and opinions of my employer or anyone else.
-        </p>
-    </div>
+    <div class="header"> {% include 'base_header.html' %} </div>
+    <div class="main"> {% block content %}{% endblock %} </div>
+    <div class="footer"> {% include 'base_footer.html' %} </div>
 </div>

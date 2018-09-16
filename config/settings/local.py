@@ -14,3 +14,5 @@ DATABASES = {
         'NAME': 'cs-cordero',
     }
 }
+
+AUTH_PASSWORD_VALIDATORS = []

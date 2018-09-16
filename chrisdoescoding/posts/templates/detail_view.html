@@ -1,58 +1,27 @@
 {% extends 'base_view.html' %}
 
 {% block content %}
-    <div class="bumper-left">
-    </div>
+    <div class="bumper-left"></div>
     <div class="content">
-        <h1>This is an h1 tag</h1>
-        <p>Bacon ipsum dolor amet fatback short loin rump capicola, brisket pancetta leberkas drumstick shoulder venison meatball cupim short ribs pork chop pig. Venison pork belly ribeye porchetta chicken jowl. Shankle meatball cow landjaeger boudin, tenderloin sirloin ham hock tail kielbasa meatloaf beef venison. Chicken venison drumstick burgdoggen doner pancetta, tenderloin spare ribs boudin. Doner andouille landjaeger, beef ribs ham hock filet mignon shoulder sausage pork loin ground round ham chuck tail jowl.</p>
-        <h2>This is an h2 tag</h2>
-        <p>Jerky chicken kielbasa buffalo fatback. Filet mignon alcatra biltong, turkey porchetta boudin tenderloin kevin pancetta pork. Strip steak sirloin beef, fatback flank boudin cupim tenderloin hamburger meatball burgdoggen capicola picanha. Pork belly pig hamburger shoulder, ham hock alcatra sirloin corned beef pork swine tri-tip flank boudin.</p>
-        <p>Flank chicken t-bone andouille shankle short loin sirloin burgdoggen. Corned beef pancetta kielbasa, pork belly sausage shank strip steak frankfurter meatloaf sirloin ground round ball tip filet mignon salami capicola. Brisket pork belly beef ribs, burgdoggen hamburger turkey kielbasa leberkas cupim tail pork shoulder. Shank meatloaf fatback capicola picanha ground round ribeye bacon turkey. Picanha rump short loin alcatra. Bacon turducken chuck brisket cupim short ribs.</p>
-        <h3>This is an h3 tag</h3>
-        <p>Doner short ribs tail pork shankle. Sirloin pancetta sausage spare ribs porchetta, ham venison rump pork chop turducken biltong pork belly tongue. Sirloin porchetta short ribs venison tail burgdoggen turkey kevin sausage brisket short loin meatball. Turkey pork chop pancetta, picanha andouille cupim pig bacon pork prosciutto flank short loin. Pig spare ribs t-bone, ribeye landjaeger corned beef beef doner alcatra strip steak jowl. Burgdoggen brisket bacon, tongue alcatra jerky buffalo ham hock turducken t-bone jowl pancetta.</p>
-        <p>Cupim kevin corned beef, tail sausage alcatra pork belly tenderloin bresaola rump short ribs cow. Spare ribs strip steak venison, biltong drumstick kielbasa short loin tenderloin meatball jowl buffalo leberkas. Alcatra tongue turkey pastrami. Meatloaf salami filet mignon short loin bacon chicken.</p>
-        <h4>This is an h4 tag</h4>
-        <p>Bresaola ham turkey leberkas strip steak beef short loin corned beef pork belly venison tri-tip pork loin ribeye. Alcatra short ribs jerky tri-tip. Biltong boudin hamburger meatball, porchetta chicken kielbasa salami prosciutto. Corned beef sirloin hamburger bacon turducken, t-bone pork belly. Filet mignon bacon pork loin, pancetta brisket ground round beef ribs ham hock swine jerky ribeye pork chop landjaeger rump short loin.</p>
-        <p>Tenderloin brisket shank andouille spare ribs meatloaf, cow chuck. Chicken t-bone short ribs cow sausage corned beef pork chop. Beef ribeye sirloin pastrami shankle salami kevin. Ham hock turkey alcatra cupim, bacon kielbasa kevin corned beef meatloaf chuck beef ribs pig. Doner brisket chicken porchetta boudin picanha sirloin salami spare ribs prosciutto, burgdoggen leberkas fatback capicola chuck. Buffalo alcatra short loin shankle porchetta tri-tip. Doner spare ribs pork belly pork chop burgdoggen, prosciutto capicola.</p>
-        <h5>This is an h5 tag</h5>
-        <p>Ham hock meatloaf cupim, filet <code>code snippet</code> chicken fatback porchetta pork chuck sirloin short ribs. Short loin doner swine andouille turducken sausage biltong pork picanha porchetta drumstick rump brisket fatback bacon. Boudin flank short loin pancetta t-bone filet mignon. Prosciutto short ribs shank, cupim chicken pork pancetta cow. Tongue beef shankle, sirloin bresaola strip steak picanha tail short loin flank biltong shank. Doner turducken kielbasa picanha buffalo burgdoggen short loin.</p>
-        <blockquote>This is a block quote.  Sausage alcatra tail, tongue swine flank landjaeger cupim ham chicken pig rump. Ribeye pig sirloin swine. Landjaeger andouille beef ribs spare ribs, chuck short ribs doner. Beef ribs bresaola burgdoggen swine, pork belly bacon drumstick shoulder spare ribs biltong landjaeger capicola. T-bone ground round shank, pork chop ribeye kielbasa ham hock tri-tip pork belly pork loin shoulder bresaola short loin corned beef. Ground round ham hock jowl, ball tip sirloin pancetta landjaeger bacon tongue tri-tip shoulder pork chop leberkas. Short loin drumstick cupim turkey t-bone pancetta flank buffalo corned beef beef ribs porchetta salami.</blockquote>
-        <h6>This is an h6 tag</h6>
-        <pre>
-Bresaola ground round pork loin, turkey brisket picanha drumstick
-prosciutto burgdoggen strip steak turducken ball tip. Capicola pork
-belly tail short loin ham spare ribs, bacon meatloaf meatball rump
-cupim. Frankfurter ball tip ribeye, bacon rump pancetta swine jowl
-biltong. Frankfurter porchetta ham t-bone rump cupim tri-tip capicola
-kevin short loin ham hock. Frankfurter beef ribs bresaola kielbasa pork
-loin. Capicola kevin boudin turkey hamburger jowl.
-        </pre>
-        <div class="navigation">
-            {% if previous_post %}
-                <a href="/posts/{{ previous_post }}">
-                    <div class="navigation-item navigation-item-left navigation-item-active">
-                        <span>Previous Post</span><br/>
-                        <span>Title of Post</span>
-                    </div>
-                </a>
-            {% else %}
-                <div class="navigation-item navigation-item-left navigation-item-disabled">
-                </div>
-            {% endif %}
-            {% if next_post %}
-                <a href="/posts/{{ next_post }}">
-                    <div class="navigation-item navigation-item-right navigation-item-active">
-                        <span>Next Post</span><br/>
-                        <span>Title of Post</span>
-                    </div>
-                </a>
-            {% else %}
-                <div class="navigation-item navigation-item-right navigation-item-disabled">
-                </div>
-            {% endif %}
+        <h1>
+            {{ post.title }}
+        </h1>
+
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
+        <h3>
+            {{ post.publication_date|date:"M d, Y" }}
+        </h3>
+
+        <hr />
+
+        <div>
+            {{ markdown.html }}
         </div>
+
+        {% include 'post_navigation.html' %}
     </div>
-    <div class="bumper-right">
-    </div>
+    <div class="bumper-right"></div>
 {% endblock %}
