@@ -52,9 +52,26 @@ body {
     flex-direction: row;
     width: 100%;
 }
+
 .footer {
-    background-color: orange;
-    min-height: 100px;
+    background-color: white;
+    border-top: 1px solid #b3b3b3;
+    min-height: 150px;
+    text-align: center;
+    padding-top: 20px;
+}
+.footer > a {
+    font-family: 'Lora', serif;
+    text-decoration: none;
+    color: black;
+    margin: 0 10px;
+}
+.footer > a:hover {
+    color: #29189c;
+}
+.footer-disclaimer {
+    font-family: 'Lora', serif;
+    color: #d1d1d1;
 }
 
 .content {
