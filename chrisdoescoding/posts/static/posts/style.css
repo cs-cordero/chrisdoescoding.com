@@ -19,7 +19,34 @@ body {
     background-color: white;
     height: 65px;
     flex: 0 0 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #b3b3b3;
 }
+.header > a {
+    text-decoration: none;
+    color: black;
+}
+.header > a:first-child {
+    margin-left: 20px;
+}
+.header > a:hover {
+    color: #29189c;
+}
+.header-button {
+    width: auto;
+    height: 100%;
+    display: flex;
+    padding: 0 7px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.header-button-label {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .main {
     display: flex;
     flex-direction: row;
@@ -31,6 +58,7 @@ body {
 }
 
 .content {
+    background-color: #f8f8f8;
     width: 650px;
     flex: 0 0 auto;
     padding: 2rem 1rem;
@@ -38,11 +66,17 @@ body {
 }
 .bumper-left {
     background-color: yellow;
+    background-color: #f8f8f8;
     flex: 0 1 100%;
 }
 .bumper-right {
     background-color: green;
+    background-color: #f8f8f8;
     flex: 0 1 100%;
+}
+
+@media all and (max-width: 1000px) {
+    .header { justify-content: center; }
 }
 
 @media all and (max-width: 650px) {
