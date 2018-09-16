@@ -25,5 +25,10 @@ class Post(models.Model):
         first_p_tag_close = markdown_body.find('</p>')
 
         if first_p_tag_open >= 0 and first_p_tag_close >= 0:
-            return markdown_body[first_p_tag_open+3:first_p_tag_close][:excerpt_length]
+            excerpt = markdown_body[first_p_tag_open+3:first_p_tag_close]
+            return (
+                f'{excerpt[:excerpt_length]}...'
+                if len(excerpt) > excerpt_length
+                else excerpt
+            )
         return ''
