@@ -9,59 +9,11 @@
 
 <div class="container">
     <div class="header">
-        <div class="header-content">
-            <h3>Chris Does Coding</h3>
-            <p>Hi, I'm Chris!  I'm a Software Developer in New York City.</p>
-        </div>
-        <div class="profile" id="profile">
-            <img src="{% static 'posts/headshot_chris.jpg' %}"
-                 alt="profile picture" />
-        </div>
     </div>
-    <div class="navbar" id='navbar'>
-        <div class="nav--item
-                    nav--item-outer
-                    nav--item-outer-active">
-            <a href="/">
-                <i class="fas fa-home"></i>
-            </a>
-        </div>
-        <div class="nav--item
-                    nav--item-outer
-                    nav--item-outer-active">
-            <a href="/posts">
-                <i class="fas fa-list-ul"></i>
-            </a>
-        </div>
-        <div class="nav--item
-                    nav--item-outer
-                    nav--item-outer-active">
-            <a href="https://github.com/cs-cordero">
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
-        <div class="nav--item
-                    nav--item-outer
-                    nav--item-outer-active">
-            <a href="https://www.linkedin.com/in/cs-cordero">
-                <i class="fab fa-linkedin"></i>
-            </a>
-        </div>
-        <div class="nav--item
-                    nav--item-outer
-                    nav--item-outer-active">
-            <a href="mailto:chris@chrisdoescoding.com">
-                <i class="far fa-envelope"></i>
-            </a>
-        </div>
+    <div class="main">
+        {% block content %}
+        {% endblock %}
     </div>
-    {% block content %}
-    {% endblock %}
     <div class="footer">
-        <p><a href='/'>chrisdoescoding.com</a></p>
-        <div class="disclaimer">
-            All opinions and blog posts herein are my own and do not reflect
-            the views and opinions of my employer or anyone else.
-        </div>
     </div>
 </div>
