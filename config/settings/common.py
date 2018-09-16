@@ -2,6 +2,8 @@ import os
 
 BASE_DIR = os.path.abspath(os.path.join(__file__, '..', '..', '..'))
 
+LISTVIEW_EXCERPT_LENGTH = 140
+
 INSTALLED_APPS = [
     'chrisdoescoding.posts',
     'chrisdoescoding.southpark',

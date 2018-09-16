@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 class Post(models.Model):
@@ -12,3 +13,13 @@ class Post(models.Model):
         prefix = ('(DRAFT {})'.format(self.last_updated.strftime('%m/%d/%Y'))
                   if not self.publication_date else '')
         return '{} {}'.format(prefix, self.title)
+
+    @property
+    def excerpt(self):
+        # TODO: Check if this works when the body is filled with markdown...
+        # it probably won't :(
+        excerpt_length = settings.LISTVIEW_EXCERPT_LENGTH
+        return (
+            f'{self.body[:excerpt_length]}...'
+            if len(self.body) > excerpt_length else self.body
+        )
