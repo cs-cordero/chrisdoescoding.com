@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="bumper-left"></div>
     <div class="content">
         <h1>All Posts</h1>
         <hr/>
         {% if error_message %}<p>strong>{{ error_message }</strong></p>{% endif %}
 
         {% if published_posts %}
-            <div class="all-posts">
-            {% for post in published_posts %}
-                <a href="/posts/{{ post.id }}/">
-                    <div class="all-posts-item">
-                        <div>
-                            <strong>{{ post.title }}</strong> <br>
-                            {{ post.publication_date|date:"m/d/y" }}
+            <div class="post-listview">
+                {% for post in published_posts %}
+                    <a href="/posts/{{ post.id }}/">
+                        <div class="post-listview-item">
+                            <h2>{{ post.title }}</h2>
+                            <h5>{{ post.publication_date|date:"m/d/y" }}</h5>
+                            <p>{{ post.excerpt }}</p>
                         </div>
-                    </div>
-                </a>
-                <hr/>
-            {% endfor %}
+                    </a>
+                {% endfor %}
             </div>
         {% else %}
             <p>No posts are available.</p>
         {% endif %}
     </div>
+    <div class="bumper-right"></div>
 {% endblock %}
