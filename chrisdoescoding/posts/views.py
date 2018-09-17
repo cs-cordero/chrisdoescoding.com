@@ -84,7 +84,7 @@ class AllPostsView(ListView):
         self.queryset = (
             Post.objects.filter(publication_date__lte=timezone.now())
                         .filter(hide=False)
-                        .reverse()
+                        .order_by('-publication_date')
         )
         return self.queryset
 
