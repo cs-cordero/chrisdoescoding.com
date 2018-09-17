@@ -15,8 +15,10 @@ class BasePostView(DetailView):
     model = Post
 
     def get_queryset(self):
-        self.queryset = Post.objects.filter(publication_date__lte=timezone.now()) \
-                                    .filter(hide=False)
+        self.queryset = (
+            Post.objects.filter(publication_date__lte=timezone.now())
+                        .filter(hide=False)
+        )
         return self.queryset
 
     def get(self, request, *args, **kwargs):
@@ -79,8 +81,11 @@ class AllPostsView(ListView):
     context_object_name = 'published_posts'
 
     def get_queryset(self):
-        self.queryset = Post.objects.filter(publication_date__lte=timezone.now()) \
-                                    .filter(hide=False)
+        self.queryset = (
+            Post.objects.filter(publication_date__lte=timezone.now())
+                        .filter(hide=False)
+                        .reverse()
+        )
         return self.queryset
 
 
