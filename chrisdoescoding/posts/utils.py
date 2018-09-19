@@ -15,9 +15,9 @@ class MarkdownParser:
 
     markdown_parser = Markdown(extensions=[GithubFlavoredMarkdownExtension()])
 
-    def __init__(self, unparsed_text):
-        self.unparsed_text = unparsed_text
-        self.html = mark_safe(self.markdown_parser.convert(unparsed_text))
+    def __init__(self, unparsed_text: str) -> None:
+        self.unparsed_text: str = unparsed_text
+        self.html: str = mark_safe(self.markdown_parser.convert(unparsed_text))
 
     def __enter__(self):
         return self
