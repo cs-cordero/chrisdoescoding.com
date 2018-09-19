@@ -10,7 +10,7 @@ from unittest.mock import patch
 class FakeMarkdownParser:
     html = 'foo'
 
-    def __exit__():
+    def __exit__(self):
         pass
 
 class TestView(TestCase):

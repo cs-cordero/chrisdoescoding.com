@@ -21,9 +21,9 @@ class Post(models.Model):
 
     @property
     def excerpt(self) -> str:
-        excerpt_length = settings.LISTVIEW_EXCERPT_LENGTH
+        excerpt_length: int = settings.LISTVIEW_EXCERPT_LENGTH
 
-        markdown_body = utils.MarkdownParser(self.body).html
+        markdown_body: str = utils.MarkdownParser(self.body).html
         first_p_tag_open = markdown_body.find('<p>')
         first_p_tag_close = markdown_body.find('</p>')
 

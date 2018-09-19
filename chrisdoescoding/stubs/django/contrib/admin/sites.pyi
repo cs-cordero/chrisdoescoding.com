@@ -1,9 +1,13 @@
+from django.db.models import Model
 from django.utils.functional import LazyObject
 
+from typing import Any
+
+
 class DefaultAdminSite(LazyObject):
-    def _setup(self): ...
+    def _setup(self) -> Any: ...
 
     # hardcoded for ease-of-typing
-    def register(self, model_or_iterable, admin_class=None, **options): ...
+    def register(self, *args: Any, **kwargs: Any) -> Any: ...
 
 site = DefaultAdminSite()
