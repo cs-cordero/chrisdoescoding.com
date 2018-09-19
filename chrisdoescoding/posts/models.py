@@ -6,6 +6,10 @@ from . import utils
 from datetime import datetime
 
 
+class PostQuerySet(models.QuerySet['Post']):
+    pass
+
+
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     body = models.TextField()
@@ -13,6 +17,8 @@ class Post(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     publication_date = models.DateTimeField(auto_now=False, null=True, blank=True)
     hide = models.BooleanField(default=False)
+
+    objects = PostQuerySet().as_manager()
 
     def __str__(self) -> str:
         prefix = ('(DRAFT {})'.format(self.last_updated.strftime('%m/%d/%Y'))

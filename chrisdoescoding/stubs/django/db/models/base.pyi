@@ -1,3 +1,7 @@
-class ModelBase(type): ...
+from typing import Type
 
-class Model(metaclass=ModelBase): ...
+
+class ModelBase(type): ...
+class Model(metaclass=ModelBase):
+    id: int
+    DoesNotExist: Type[Exception]

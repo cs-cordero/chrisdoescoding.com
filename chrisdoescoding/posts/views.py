@@ -1,27 +1,28 @@
+from django.db import models
+from django.http import HttpRequest, HttpResponseRedirect, Http404, HttpResponse
 from django.shortcuts import render
+from django.utils import timezone
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.base import RedirectView
-from django.http import HttpResponseRedirect, Http404, HttpResponse
 
 from chrisdoescoding.posts.models import Post
 from chrisdoescoding.posts.utils import MarkdownParser
 
-from django.utils import timezone
-
 import random
+from typing import Any, Optional, Dict
 
 
 class BasePostView(DetailView):
     model = Post
 
-    def get_queryset(self):
+    def get_queryset(self) -> models.QuerySet[Post]:
         self.queryset = (
             Post.objects.filter(publication_date__lte=timezone.now())
                         .filter(hide=False)
         )
         return self.queryset
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request: HttpRequest, *args: Any, **kwargs: Any) -> HttpResponse:
         # find the post
         self.object = self.get_object()
         if not self.object:
@@ -35,10 +36,12 @@ class BasePostView(DetailView):
 
         return self.render_to_response(context)
 
-    def get_next_and_prev(self, current):
+    def get_next_and_prev(self, current: Post) -> Dict[str, Optional[Post]]:
         reference_time = current.publication_date
         published_posts = self.get_queryset()
 
+        previous_post: Optional[Post]
+        next_post: Optional[Post]
         try:
             previous_post = (
                 published_posts
@@ -65,7 +68,7 @@ class BasePostView(DetailView):
 class LatestPostView(BasePostView):
     template_name = 'detail_view.html'
 
-    def get_object(self):
+    def get_object(self) -> Optional[Post]:
         try:
             return self.get_queryset().latest('publication_date')
         except:
@@ -80,7 +83,7 @@ class AllPostsView(ListView):
     template_name = 'list_view.html'
     context_object_name = 'published_posts'
 
-    def get_queryset(self):
+    def get_queryset(self) -> models.QuerySet[Post]:
         self.queryset = (
             Post.objects.filter(publication_date__lte=timezone.now())
                         .filter(hide=False)
@@ -90,12 +93,12 @@ class AllPostsView(ListView):
 
 
 class RandomPostView(RedirectView):
-    def get_queryset(self):
+    def get_queryset(self) -> models.QuerySet[Post]:
         self.queryset = Post.objects.filter(publication_date__lte=timezone.now()) \
                                     .filter(hide=False)
         return self.queryset
 
-    def get_redirect_url(self, *args, **kwargs):
+    def get_redirect_url(self, *args: Any, **kwargs: Any) -> str:
         published_posts = self.get_queryset()
         random_selection = random.randint(0, len(published_posts)-1)
         post_id = published_posts[random_selection].id

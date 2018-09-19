@@ -15,7 +15,7 @@ class MarkdownParser:
     ```
     """
 
-    markdown_parser = Markdown(extensions=[GithubFlavoredMarkdownExtension()])  # type: ignore
+    markdown_parser = Markdown(extensions=[GithubFlavoredMarkdownExtension()])
 
     def __init__(self, unparsed_text: str) -> None:
         self.unparsed_text: str = unparsed_text
