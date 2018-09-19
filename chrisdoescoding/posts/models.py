@@ -3,6 +3,9 @@ from django.db import models
 
 from . import utils
 
+from datetime import datetime
+
+
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     body = models.TextField()
@@ -11,13 +14,13 @@ class Post(models.Model):
     publication_date = models.DateTimeField(auto_now=False, null=True, blank=True)
     hide = models.BooleanField(default=False)
 
-    def __str__(self):
+    def __str__(self) -> str:
         prefix = ('(DRAFT {})'.format(self.last_updated.strftime('%m/%d/%Y'))
                   if not self.publication_date else '')
         return '{} {}'.format(prefix, self.title)
 
     @property
-    def excerpt(self):
+    def excerpt(self) -> str:
         excerpt_length = settings.LISTVIEW_EXCERPT_LENGTH
 
         markdown_body = utils.MarkdownParser(self.body).html
