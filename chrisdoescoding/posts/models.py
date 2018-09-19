@@ -5,8 +5,24 @@ from . import utils
 
 from datetime import datetime
 
+from typing import Generic, TypeVar, Any
 
-class PostQuerySet(models.QuerySet['Post']):
+T = TypeVar('T')
+
+
+class TypedQuerySet(models.QuerySet, Generic[T]):
+    # note that this as_manager function actually returns a Manager type but we
+    # are typing it differently here
+    def as_manager(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...
+    def filter(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...
+    def order_by(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...
+    def earliest(self, *args: Any, **kwargs: Any) -> T: ...
+    def latest(self, *args: Any, **kwargs: Any) -> T: ...
+    def __len__(self) -> int: ...
+    def __getitem__(self, k: int) -> T: ...
+
+
+class PostQuerySet(TypedQuerySet['Post']):
     pass
 
 

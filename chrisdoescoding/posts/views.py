@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.base import RedirectView
 
-from chrisdoescoding.posts.models import Post
+from chrisdoescoding.posts.models import Post, TypedQuerySet
 from chrisdoescoding.posts.utils import MarkdownParser
 
 import random
@@ -15,7 +15,7 @@ from typing import Any, Optional, Dict
 class BasePostView(DetailView):
     model = Post
 
-    def get_queryset(self) -> models.QuerySet[Post]:
+    def get_queryset(self) -> TypedQuerySet[Post]:
         self.queryset = (
             Post.objects.filter(publication_date__lte=timezone.now())
                         .filter(hide=False)
@@ -83,7 +83,7 @@ class AllPostsView(ListView):
     template_name = 'list_view.html'
     context_object_name = 'published_posts'
 
-    def get_queryset(self) -> models.QuerySet[Post]:
+    def get_queryset(self) -> TypedQuerySet[Post]:
         self.queryset = (
             Post.objects.filter(publication_date__lte=timezone.now())
                         .filter(hide=False)
@@ -93,7 +93,7 @@ class AllPostsView(ListView):
 
 
 class RandomPostView(RedirectView):
-    def get_queryset(self) -> models.QuerySet[Post]:
+    def get_queryset(self) -> TypedQuerySet[Post]:
         self.queryset = Post.objects.filter(publication_date__lte=timezone.now()) \
                                     .filter(hide=False)
         return self.queryset
