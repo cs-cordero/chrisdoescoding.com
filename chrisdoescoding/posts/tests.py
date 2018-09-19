@@ -1,11 +1,11 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.utils import timezone
 
 from chrisdoescoding.posts.models import Post
-from chrisdoescoding.posts.views import BasePostView
 
 from datetime import timedelta
 from unittest.mock import patch
+
 
 class FakeMarkdownParser:
     html = 'foo'
@@ -13,23 +13,23 @@ class FakeMarkdownParser:
     def __exit__(self):
         pass
 
+
 class TestView(TestCase):
 
     @classmethod
     def setUpTestData(cls):
         now = timezone.now()
-        created = now - timedelta(hours=3)
 
         cls.post_0 = Post.objects.create(title='post 0',
-                                         publication_date=now-timedelta(hours=2))
+                                         publication_date=now - timedelta(hours=2))
         cls.post_1 = Post.objects.create(title='post 1',
-                                         publication_date=now-timedelta(hours=1))
+                                         publication_date=now - timedelta(hours=1))
         cls.post_2 = Post.objects.create(title='post 2')
         cls.post_3 = Post.objects.create(title='post 3',
-                                         publication_date=now-timedelta(minutes=30),
+                                         publication_date=now - timedelta(minutes=30),
                                          hide=True)
         cls.post_4 = Post.objects.create(title='post 4',
-                                         publication_date=now-timedelta(hours=0))
+                                         publication_date=now - timedelta(hours=0))
 
     def test_unable_to_find_post(self):
         """ should 404 when user tries to look for a post that doesn't exist """

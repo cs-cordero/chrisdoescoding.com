@@ -3,6 +3,8 @@ from django.views.generic.base import RedirectView
 
 import json
 import random
+from typing import Any
+
 
 class SouthParkView(TemplateView):
     template_name = 'southpark.html'
@@ -17,7 +19,7 @@ class SouthParkRedirectView(RedirectView):
 
     south_park_ids = list({episode.get('id') for episode in data})
 
-    def get_redirect_url(self, *args, **kwargs):
+    def get_redirect_url(self, *args: Any, **kwargs: Any) -> str:
         count_ids = len(self.south_park_ids)
-        sp_id = self.south_park_ids[random.randint(0, count_ids+1)]
+        sp_id = self.south_park_ids[random.randint(0, count_ids + 1)]
         return f'https://hulu.com/watch/{sp_id}'

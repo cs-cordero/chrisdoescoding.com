@@ -1,12 +1,18 @@
 ROOT=$(dirname $0)
-echo $ROOT
-
 export PYTHONPATH=$ROOT
 export DJANGO_SETTINGS_MODULE='config.settings.local'
 export MYPYPATH="$ROOT/chrisdoescoding/stubs"
-echo -ne "Running mypy tests..."\\r
-mypy --config-file $ROOT/chrisdoescoding/mypy.ini $ROOT/chrisdoescoding/posts
-[ ! $? = 0 ] && echo "Mypy test failed. Exiting..." && exit
-echo "Running mypy tests...Success!"
+
+echo -ne "Running mypy..."\\r
+mypy chrisdoescoding
+[ ! $? = 0 ] && echo "Mypy failed. Exiting..." && exit
+echo "Running mypy...Success!"
 echo
+
+echo -ne "Running flake8..."\\r
+flake8 chrisdoescoding
+[ ! $? = 0 ] && echo "Flake8 failed. Exiting..." && exit
+echo "Running flake8...Success!"
+echo
+
 python $ROOT/chrisdoescoding/manage.py test chrisdoescoding/

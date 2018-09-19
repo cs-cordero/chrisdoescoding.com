@@ -13,13 +13,13 @@ T = TypeVar('T')
 class TypedQuerySet(models.QuerySet, Generic[T]):
     # note that this as_manager function actually returns a Manager type but we
     # are typing it differently here
-    def as_manager(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...
-    def filter(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...
-    def order_by(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...
-    def earliest(self, *args: Any, **kwargs: Any) -> T: ...
-    def latest(self, *args: Any, **kwargs: Any) -> T: ...
-    def __len__(self) -> int: ...
-    def __getitem__(self, k: int) -> T: ...
+    def as_manager(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...  # flake8: noqa
+    def filter(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...  # flake8: noqa
+    def order_by(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...  # flake8: noqa
+    def earliest(self, *args: Any, **kwargs: Any) -> T: ...  # flake8: noqa
+    def latest(self, *args: Any, **kwargs: Any) -> T: ...  # flake8: noqa
+    def __len__(self) -> int: ...  # flake8: noqa
+    def __getitem__(self, k: int) -> T: ...  # flake8: noqa
 
 
 class PostQuerySet(TypedQuerySet['Post']):
@@ -50,7 +50,7 @@ class Post(models.Model):
         first_p_tag_close = markdown_body.find('</p>')
 
         if first_p_tag_open >= 0 and first_p_tag_close >= 0:
-            excerpt = markdown_body[first_p_tag_open+3:first_p_tag_close]
+            excerpt = markdown_body[first_p_tag_open + 3:first_p_tag_close]
             return (
                 f'{excerpt[:excerpt_length]}...'
                 if len(excerpt) > excerpt_length

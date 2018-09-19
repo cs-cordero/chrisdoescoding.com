@@ -5,6 +5,7 @@ from mdx_gfm import GithubFlavoredMarkdownExtension
 
 from typing import Any
 
+
 class MarkdownParser:
     """ Takes unicode strings and turns them into html
 

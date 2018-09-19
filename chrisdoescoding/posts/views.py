@@ -1,8 +1,6 @@
-from django.db import models
-from django.http import HttpRequest, HttpResponseRedirect, Http404, HttpResponse
-from django.shortcuts import render
+from django.http import HttpRequest, Http404, HttpResponse
 from django.utils import timezone
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import RedirectView
 
 from chrisdoescoding.posts.models import Post, TypedQuerySet
@@ -31,7 +29,7 @@ class BasePostView(DetailView):
         # build the context
         context = self.get_context_data(object=self.object)
         with MarkdownParser(self.object.body) as markdown:
-            context.update({ 'markdown': markdown })
+            context.update({'markdown': markdown})
         context.update(self.get_next_and_prev(self.object))
 
         return self.render_to_response(context)
@@ -71,7 +69,7 @@ class LatestPostView(BasePostView):
     def get_object(self) -> Optional[Post]:
         try:
             return self.get_queryset().latest('publication_date')
-        except:
+        except Post.DoesNotExist:
             return None
 
 
@@ -86,8 +84,8 @@ class AllPostsView(ListView):
     def get_queryset(self) -> TypedQuerySet[Post]:
         self.queryset = (
             Post.objects.filter(publication_date__lte=timezone.now())
-                        .filter(hide=False)
-                        .order_by('-publication_date')
+                .filter(hide=False)
+                .order_by('-publication_date')
         )
         return self.queryset
 
@@ -100,6 +98,6 @@ class RandomPostView(RedirectView):
 
     def get_redirect_url(self, *args: Any, **kwargs: Any) -> str:
         published_posts = self.get_queryset()
-        random_selection = random.randint(0, len(published_posts)-1)
+        random_selection = random.randint(0, len(published_posts) - 1)
         post_id = published_posts[random_selection].id
         return f'/posts/{post_id}'
