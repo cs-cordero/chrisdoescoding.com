@@ -1,13 +1,22 @@
-{% block extrahead %}
-{% endblock %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chris Does Coding</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="The personal blog site of Christopher Cordero.  A software engineer working in New York City.">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        {% block extrahead %} {% endblock %}
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'posts/reset.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'posts/base.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
+    </head>
 
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'posts/reset.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'posts/base.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'posts/style.css' %}" />
-
-<div class="container">
-    <div class="header"> {% include 'base_header.html' %} </div>
-    <div class="main"> {% block content %}{% endblock %} </div>
-    <div class="footer"> {% include 'base_footer.html' %} </div>
-</div>
+    <body>
+        <div class="container">
+            <div class="header"> {% include 'base_header.html' %} </div>
+            <div class="main"> {% block content %}{% endblock %} </div>
+            <div class="footer"> {% include 'base_footer.html' %} </div>
+        </div>
+    </body>
+</html>
