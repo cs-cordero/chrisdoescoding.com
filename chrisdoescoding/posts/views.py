@@ -26,6 +26,9 @@ class BasePostView(DetailView):
         if not self.object:
             raise Http404('Did not find a published post to return!')
 
+        if 'raw' in request.GET:
+            return HttpResponse(self.object.body, content_type='text/plain')
+
         # build the context
         context = self.get_context_data(object=self.object)
         with MarkdownParser(self.object.body) as markdown:
