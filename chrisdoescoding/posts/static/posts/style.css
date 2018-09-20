@@ -156,4 +156,7 @@ body {
     .navigation { flex: 0 1 auto; width: 100%;}
     .bumper-left { flex-basis: 0; }
     .bumper-right { flex-basis: 0; }
+    .header { justify-content: space-evenly; }
+    .header > a:first-child { margin-left: 0; }
+    .header-button { padding: 0; }
 }
