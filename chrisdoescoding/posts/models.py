@@ -5,7 +5,7 @@ from . import utils
 
 from datetime import datetime
 
-from typing import Generic, TypeVar, Any
+from typing import Generic, TypeVar, Any, Union
 
 T = TypeVar('T')
 
@@ -19,7 +19,7 @@ class TypedQuerySet(models.QuerySet, Generic[T]):
     def earliest(self, *args: Any, **kwargs: Any) -> T: ...  # flake8: noqa
     def latest(self, *args: Any, **kwargs: Any) -> T: ...  # flake8: noqa
     def __len__(self) -> int: ...  # flake8: noqa
-    def __getitem__(self, k: int) -> T: ...  # flake8: noqa
+    def __getitem__(self, k: Union[int, slice]) -> T: ...  # flake8: noqa
 
 
 class PostQuerySet(TypedQuerySet['Post']):
