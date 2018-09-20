@@ -71,3 +71,6 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
+
+TITLE = 'Chris Does Coding'
+DESCRIPTION = 'The personal blog site of Christopher Cordero.  A software engineer working in New York City.'
