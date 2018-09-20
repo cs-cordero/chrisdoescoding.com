@@ -1,7 +1,6 @@
 from django.http import HttpRequest, Http404, HttpResponse
 from django.utils import timezone
-from django.views.generic import DetailView, ListView
-from django.views.generic.base import RedirectView
+from django.views.generic import DetailView, ListView, RedirectView
 
 from chrisdoescoding.posts.models import Post, TypedQuerySet
 from chrisdoescoding.posts.utils import MarkdownParser

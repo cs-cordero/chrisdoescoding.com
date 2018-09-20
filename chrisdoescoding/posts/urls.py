@@ -1,7 +1,7 @@
 from django.urls import path
 
-from chrisdoescoding.posts import feed
-from chrisdoescoding.posts import views
+from chrisdoescoding.posts import feed, views
+
 
 urlpatterns = [
     path('latest/', views.LatestPostView.as_view(), name='latest'),

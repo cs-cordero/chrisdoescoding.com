@@ -16,7 +16,6 @@ class FakeMarkdownParser:
 
 
 class TestView(TestCase):
-
     @classmethod
     def setUpTestData(cls):
         now = timezone.now()

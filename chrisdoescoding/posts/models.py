@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.db import models
 
-from . import utils
+from chrisdoescoding.posts import utils
 
 from datetime import datetime
-
 from typing import Generic, TypeVar, Any, Union
+
 
 T = TypeVar('T')
 
