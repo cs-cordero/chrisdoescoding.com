@@ -74,14 +74,15 @@ body {
 .footer-disclaimer {
     font-family: 'Lora', serif;
     color: #d1d1d1;
+    margin: 1em 2em;
 }
 
 .content {
     background-color: #f8f8f8;
-    width: 650px;
-    flex: 0 0 auto;
-    padding: 2rem 1rem;
     margin-top: 65px;
+    padding: 1em 0 2em 0;
+    overflow: auto;
+    flex: 0 0 650px;
 }
 .bumper-left {
     background-color: #f8f8f8;
@@ -152,10 +153,10 @@ body {
 }
 
 @media all and (max-width: 650px) {
-    .content { flex: 0 1 auto; width: 100%;}
-    .navigation { flex: 0 1 auto; width: 100%;}
-    .bumper-left { flex-basis: 0; }
-    .bumper-right { flex-basis: 0; }
+    .content { flex: 0 1 100%; }
+    .bumper-left { flex: 1 0 15px; }
+    .bumper-right { flex: 1 0 15px; }
+    .navigation { flex: 0 1 auto; width: 100%; margin-left: 0; margin-right: 0}
     .header { justify-content: space-evenly; }
     .header > a:first-child { margin-left: 0; }
     .header-button { padding: 0; }
