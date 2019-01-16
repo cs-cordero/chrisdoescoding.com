@@ -6,12 +6,12 @@ name = "pypi"
 [packages]
 certifi = "*"
 gunicorn = "*"
-py-gfm = "*"
 pytz = "*"
-Django = "*"
-Markdown = "*"
+Django = ">=2.1.5"
 "psycopg2" = "*"
 requests = "*"
+markdown = "*"
+py-gfm = "*"
 
 [dev-packages]
 mypy = "*"
