@@ -69,3 +69,5 @@ STATIC_URL = "/static/"
 
 TITLE = "Chris Does Coding"
 DESCRIPTION = "The personal blog site of Christopher Cordero.  A software engineer working in New York City."
+
+SHELL_PLUS_PRE_IMPORTS = ["factories"]
