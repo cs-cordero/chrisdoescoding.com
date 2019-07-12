@@ -1,6 +1,6 @@
-from django.conf import settings
 import dateutil
 import factory
+from django.conf import settings
 
 DEFAULT_TIMEZONE = dateutil.tz.gettz(settings.TIME_ZONE)
 

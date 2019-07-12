@@ -1,8 +1,8 @@
-from django.db.models import QuerySet
-
 from typing import Generic, TypeVar
 
-T = TypeVar('T')
+from django.db.models import QuerySet
+
+T = TypeVar("T")
 
 class BaseManager: ...
 class Manager(BaseManager): ...

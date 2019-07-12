@@ -1,14 +1,12 @@
-from django.db.models import QuerySet
-from django.views.generic.base import ContextMixin, TemplateResponseMixin, View
-
 from typing import Any, Dict
 
+from django.db.models import QuerySet
+from django.views.generic.base import ContextMixin, TemplateResponseMixin, View
 
 class SingleObjectMixin(ContextMixin):
     def get_object(self) -> Any: ...
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]: ...
 
 class SingleObjectTemplateResponseMixin(TemplateResponseMixin): ...
-
 class BaseDetailView(SingleObjectMixin, View): ...
 class DetailView(SingleObjectTemplateResponseMixin, BaseDetailView): ...

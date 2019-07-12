@@ -2,7 +2,6 @@ from django.urls import path
 
 from posts import feed, views
 
-
 urlpatterns = [
     path("latest/", views.LatestPostView.as_view(), name="latest"),
     path("<int:pk>/", views.PostView.as_view(), name="post"),

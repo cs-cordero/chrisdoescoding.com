@@ -1,12 +1,13 @@
+from typing import Any, Callable, Dict
+
 from django.http import HttpRequest, HttpResponse
 
-from typing import Callable, Any, Dict
-
-
 class ContextMixin: ...
+
 class TemplateResponseMixin:
-    def render_to_response(self, context: Dict[str, Any],
-                           **response_kwargs:Any) -> HttpResponse: ...
+    def render_to_response(
+        self, context: Dict[str, Any], **response_kwargs: Any
+    ) -> HttpResponse: ...
 
 class View:
     @classmethod

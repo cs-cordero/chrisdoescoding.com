@@ -1,12 +1,12 @@
-from django.http import HttpRequest, Http404, HttpResponse
+import random
+from typing import Any, Dict, Optional
+
+from django.http import Http404, HttpRequest, HttpResponse
 from django.utils import timezone
 from django.views.generic import DetailView, ListView, RedirectView
 
 from posts.models import Post, TypedQuerySet
 from posts.utils import MarkdownParser
-
-import random
-from typing import Any, Optional, Dict
 
 
 class BasePostView(DetailView):

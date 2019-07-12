@@ -1,6 +1,5 @@
 from typing import Any, List
 
-
 class Markdown:
     def __init__(self, extensions: Any) -> None: ...
     def convert(self, source: str) -> str: ...

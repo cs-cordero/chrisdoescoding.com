@@ -1,7 +1,7 @@
-from django.db.models.query_utils import RegisterLookupMixin
-
 import datetime
-from typing import Any, Optional, Iterable, Tuple, Callable
+from typing import Any, Callable, Iterable, Optional, Tuple
+
+from django.db.models.query_utils import RegisterLookupMixin
 
 # class NOT_PROVIDED: ...
 #
