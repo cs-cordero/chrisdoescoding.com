@@ -1,10 +1,13 @@
 import os
+from typing import Optional
 
 from django.core.exceptions import ImproperlyConfigured
 
 from .common import *  # noqa: F403
 
 DEBUG = False
+SECRET_KEY: Optional[str]
+_DATABASE: Optional[str]
 
 try:
     with open(os.path.join(BASE_DIR, "secret"), "r") as f:  # noqa: F405

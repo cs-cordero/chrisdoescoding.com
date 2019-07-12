@@ -1,10 +1,9 @@
 ROOT=$(dirname $0)
 export PYTHONPATH=$ROOT
 export DJANGO_SETTINGS_MODULE='config.settings.local'
-export MYPYPATH="$ROOT/chrisdoescoding/stubs"
 
 echo -ne "Running mypy..."\\r
-mypy chrisdoescoding
+mypy chrisdoescoding --no-incremental
 [ ! $? = 0 ] && echo "Mypy failed. Exiting..." && exit
 echo "Running mypy...Success!"
 echo

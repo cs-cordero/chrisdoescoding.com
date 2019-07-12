@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 from .common import *  # noqa: F401, F403
 
 DEBUG = True
@@ -8,4 +10,4 @@ DATABASES = {
     "default": {"ENGINE": "django.db.backends.postgresql", "NAME": "cs-cordero"}
 }
 
-AUTH_PASSWORD_VALIDATORS = []
+AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = []

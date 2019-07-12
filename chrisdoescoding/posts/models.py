@@ -1,40 +1,7 @@
-from typing import Any, Generic, TypeVar, Union
-
 from django.conf import settings
 from django.db import models
 
 from posts import utils
-
-T = TypeVar("T")
-
-
-class TypedQuerySet(models.QuerySet, Generic[T]):
-    # note that this as_manager function actually returns a Manager type but we
-    # are typing it differently here
-    def as_manager(self, *args: Any, **kwargs: Any) -> "TypedQuerySet[T]":
-        ...  # flake8: noqa
-
-    def filter(self, *args: Any, **kwargs: Any) -> "TypedQuerySet[T]":
-        ...  # flake8: noqa
-
-    def order_by(self, *args: Any, **kwargs: Any) -> "TypedQuerySet[T]":
-        ...  # flake8: noqa
-
-    def earliest(self, *args: Any, **kwargs: Any) -> T:
-        ...  # flake8: noqa
-
-    def latest(self, *args: Any, **kwargs: Any) -> T:
-        ...  # flake8: noqa
-
-    def __len__(self) -> int:
-        ...  # flake8: noqa
-
-    def __getitem__(self, k: Union[int, slice]) -> T:
-        ...  # flake8: noqa
-
-
-class PostQuerySet(TypedQuerySet["Post"]):
-    pass
 
 
 class Post(models.Model):
@@ -44,8 +11,6 @@ class Post(models.Model):
     last_updated = models.DateTimeField(auto_now=True)
     publication_date = models.DateTimeField(auto_now=False, null=True, blank=True)
     hide = models.BooleanField(default=False)
-
-    objects = PostQuerySet().as_manager()
 
     def __str__(self) -> str:
         prefix = (

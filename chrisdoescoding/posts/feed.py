@@ -11,16 +11,16 @@ class RssPostFeed(Feed):
     link = "/"
     description = settings.DESCRIPTION
 
-    def items(self) -> models.Post:
+    def items(self):
         return models.Post.objects.order_by("-publication_date")[:5]
 
-    def item_title(self, item: models.Post) -> str:
+    def item_title(self, item):
         return item.title
 
-    def item_description(self, item: models.Post) -> str:
+    def item_description(self, item):
         return item.excerpt
 
-    def item_link(self, item: models.Post) -> str:
+    def item_link(self, item):
         return reverse("post", args=[item.pk])
 
 
