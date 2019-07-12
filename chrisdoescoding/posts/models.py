@@ -1,28 +1,41 @@
 from django.conf import settings
 from django.db import models
 
-from chrisdoescoding.posts import utils
+from posts import utils
 
 from datetime import datetime
 from typing import Generic, TypeVar, Any, Union
 
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class TypedQuerySet(models.QuerySet, Generic[T]):
     # note that this as_manager function actually returns a Manager type but we
     # are typing it differently here
-    def as_manager(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...  # flake8: noqa
-    def filter(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...  # flake8: noqa
-    def order_by(self, *args: Any, **kwargs: Any) -> 'TypedQuerySet[T]': ...  # flake8: noqa
-    def earliest(self, *args: Any, **kwargs: Any) -> T: ...  # flake8: noqa
-    def latest(self, *args: Any, **kwargs: Any) -> T: ...  # flake8: noqa
-    def __len__(self) -> int: ...  # flake8: noqa
-    def __getitem__(self, k: Union[int, slice]) -> T: ...  # flake8: noqa
+    def as_manager(self, *args: Any, **kwargs: Any) -> "TypedQuerySet[T]":
+        ...  # flake8: noqa
+
+    def filter(self, *args: Any, **kwargs: Any) -> "TypedQuerySet[T]":
+        ...  # flake8: noqa
+
+    def order_by(self, *args: Any, **kwargs: Any) -> "TypedQuerySet[T]":
+        ...  # flake8: noqa
+
+    def earliest(self, *args: Any, **kwargs: Any) -> T:
+        ...  # flake8: noqa
+
+    def latest(self, *args: Any, **kwargs: Any) -> T:
+        ...  # flake8: noqa
+
+    def __len__(self) -> int:
+        ...  # flake8: noqa
+
+    def __getitem__(self, k: Union[int, slice]) -> T:
+        ...  # flake8: noqa
 
 
-class PostQuerySet(TypedQuerySet['Post']):
+class PostQuerySet(TypedQuerySet["Post"]):
     pass
 
 
@@ -37,23 +50,26 @@ class Post(models.Model):
     objects = PostQuerySet().as_manager()
 
     def __str__(self) -> str:
-        prefix = ('(DRAFT {})'.format(self.last_updated.strftime('%m/%d/%Y'))
-                  if not self.publication_date else '')
-        return '{} {}'.format(prefix, self.title)
+        prefix = (
+            "(DRAFT {})".format(self.last_updated.strftime("%m/%d/%Y"))
+            if not self.publication_date
+            else ""
+        )
+        return "{} {}".format(prefix, self.title)
 
     @property
     def excerpt(self) -> str:
         excerpt_length: int = settings.LISTVIEW_EXCERPT_LENGTH
 
         markdown_body: str = utils.MarkdownParser(self.body).html
-        first_p_tag_open = markdown_body.find('<p>')
-        first_p_tag_close = markdown_body.find('</p>')
+        first_p_tag_open = markdown_body.find("<p>")
+        first_p_tag_close = markdown_body.find("</p>")
 
         if first_p_tag_open >= 0 and first_p_tag_close >= 0:
-            excerpt = markdown_body[first_p_tag_open + 3:first_p_tag_close]
+            excerpt = markdown_body[first_p_tag_open + 3 : first_p_tag_close]
             return (
-                f'{excerpt[:excerpt_length]}...'
+                f"{excerpt[:excerpt_length]}..."
                 if len(excerpt) > excerpt_length
                 else excerpt
             )
-        return ''
+        return ""
