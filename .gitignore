@@ -1,5 +1,6 @@
 *.pyc
 static/*
 dist/*
+envs
 .mypy_cache/*
 */.mypy_cache/*

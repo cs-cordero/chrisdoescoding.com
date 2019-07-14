@@ -1,13 +1,10 @@
 import os
 from typing import Optional
 
-from django.core.exceptions import ImproperlyConfigured
-
 from .common import *  # noqa: F403
 
 DEBUG = False
 SECRET_KEY: Optional[str]
-_DATABASE: Optional[str]
 
 try:
     with open(os.path.join(BASE_DIR, "secret"), "r") as f:  # noqa: F405
@@ -25,17 +22,15 @@ ALLOWED_HOSTS = [
 ]
 
 
-try:
-    with open(os.path.join(BASE_DIR, "database"), "r") as f:  # noqa: F405
-        _DATABASE = f.read()
-except FileNotFoundError:
-    _DATABASE = os.environ.get("DATABASE")
-
-DATABASES = {"default": {"ENGINE": "django.db.backends.postgresql", "NAME": _DATABASE}}
-
-if not DATABASES["default"]["NAME"]:
-    raise ImproperlyConfigured("Missing DATABASE environment variable")
-del _DATABASE
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["DB_NAME"],
+        "HOST": os.environ["DB_HOST"],
+        "PORT": os.environ["DB_PORT"],
+        "USER": os.environ["DB_USER"],
+    }
+}
 
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_BROWSER_XSS_FILTER = True

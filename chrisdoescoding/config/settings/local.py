@@ -11,3 +11,5 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS: List[Dict[str, str]] = []
+
+INSTALLED_APPS.append("django_extensions")  # noqa: F405
