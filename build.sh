@@ -1,60 +1,51 @@
-IMAGE_LOCATION="$1"
+SCRIPT_NAME=$(basename "$0")
+function usage(){
+    echo "$SCRIPT_NAME"
+    echo "Builds a docker image from the repository and pushes it to Docker Hub."
+    echo
+    echo "Usage:"
+    echo "    $SCRIPT_NAME tag"
+    echo
+    echo "Arguments:"
+    echo "    tag:  Must be in the format vX.Y.Z, e.g., v1.1.0"
+    exit 1
+}
 
-[ -z "$1" ] && echo 'Need an image_file from mounting_point.' && exit
-[ ! -f "$1" ] && echo "Could not find $1" && exit
+TAG=
+for i in "$@"; do
+    case $i in
+        -h|--help)
+            usage
+            ;;
+        -t=*|--tag=*)
+            [[ -n "$TAG" ]] && usage
+            TAG="${i#*=}"
+            shift
+            ;;
+        -t|--tag)
+            [[ -n "$TAG" ]] && usage
+            TAG="$2"
+            shift
+            shift
+            ;;
+        *)
+            [[ -n "$TAG" ]] && usage
+            TAG="$i"
+            shift
+            ;;
+    esac
+done
 
-BUILD_SITE="$HOME/chrisdoescoding"
-
-echo "Removing the last _old archive..."
-[ -d "${BUILD_SITE}_old" ] && rm -rf "${BUILD_SITE}_old"
-
-# killing gunicorn
-pkill gunicorn
-
-echo "Destroying old virtual environment and archiving old build"
-if [ -d $BUILD_SITE ]; then
-    cd $BUILD_SITE
-    # pipenv --rm
-    cd $HOME
-    mv "$BUILD_SITE" "${BUILD_SITE}_old"
+if [[ -z "$TAG" ]] || [[ -z $(echo "$TAG" | grep 'v\d\+\.\d\+\.\d\+') ]]; then
+    printf "E: A tag label with the format vX.Y.Z is required.\n" >&2;
+    usage
 fi
 
-echo "Unzipping Image files..."
-unzip $IMAGE_LOCATION -d $BUILD_SITE
-cd $BUILD_SITE
-mv chrisdoescoding/* ./
-rm -r chrisdoescoding
-unzip chrisdoescoding.zip
-rm chrisdoescoding.zip
+# This assumes that you are inside the root git folder.
+# TODO allow this to be run from anywhere.
+IMAGE_NAME=cscordero/chrisdoescoding.com:$TAG
+docker build -t $IMAGE_NAME .
+docker push $IMAGE_NAME
 
-echo "Copying old database pointer to new site..."
-cd $HOME
-FOUND_DB_FILE=0
-if [ -d "${BUILD_SITE}_old" ]; then
-    if [ -f "${BUILD_SITE}_old/database" ]
-        cp "${BUILD_SITE}_old/database" $BUILD_SITE
-        FOUND_DB_FILE=1
-    fi
-fi
-[ $FOUND_DB_FILE = 0 ] && echo "Could not find old database file! You'll have to create it manually."
-
-echo "Building the environment..."
-cd $BUILD_SITE
-pipenv install
-
-echo "Performing some health checks..."
-ERROR=0
-[ ! -f "${BUILD_SITE}/database" ] && echo "Missing ${BUILD_SITE}/database file." && ERROR=1
-[ ! -f "${BUILD_SITE}/secret" ] && echo "Missing ${BUILD_SITE}/secret file." && ERROR=1
-[ ! -d "${BUILD_SITE}/static" ] && echo "Missing ${BUILD_SITE}/static directory." && ERROR=1
-if [ ! -f "/etc/nginx/nginx.conf" ]; then
-    if [ ! -f "${BUILD_SITE}/nginx.conf" ]; then
-        echo "Missing ${BUILD_SITE}/database file."
-    else
-        echo "Manually copy the ${BUILD_SITE}/nginx.conf file to /etc/nginx/."
-    fi
-    ERROR=1
-fi
-[ $ERROR = 1 ] && exit
-
-echo "Build complete.  Call pipenv shell then source start_prod to begin the server.  Double check that the app is running and that the server is listening using sudo netstat -tulpn.  Good luck."
+docker tag $IMAGE_NAME cscordero/chrisdoescoding.com:latest
+docker push cscordero/chrisdoescoding.com:latest
