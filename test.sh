@@ -1,17 +1,9 @@
-ROOT=$(dirname $0)
-export PYTHONPATH=$ROOT
-export DJANGO_SETTINGS_MODULE='config.settings.local'
+set -e  # Exit immediately after first non-zero return value
+DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE || 'config.settings.local'
 
-echo -ne "Running mypy..."\\r
 mypy chrisdoescoding --no-incremental
-[ ! $? = 0 ] && echo "Mypy failed. Exiting..." && exit
-echo "Running mypy...Success!"
-echo
-
-echo -ne "Running flake8..."\\r
-flake8 chrisdoescoding
-[ ! $? = 0 ] && echo "Flake8 failed. Exiting..." && exit
-echo "Running flake8...Success!"
-echo
-
-python $ROOT/chrisdoescoding/manage.py test chrisdoescoding/
+flake8 chrisdoescoding --count
+isort -rc chrisdoescoding --check-only
+black chrisdoescoding --check
+python chrisdoescoding/manage.py makemigrations --check
+python chrisdoescoding/manage.py test
