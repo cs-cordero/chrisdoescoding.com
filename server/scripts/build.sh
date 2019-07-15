@@ -1,4 +1,12 @@
 SCRIPT_NAME=$(basename "$0")
+SCRIPTS_FOLDER=$(dirname "$0")
+PROJECT_ROOT=$SCRIPTS_FOLDER/../../
+
+if [[ ! -e "$PROJECT_ROOT/pyproject.toml" ]]; then
+    printf "E: $PROJECT_ROOT is not the project root.\n" >&2;
+    exit 1
+fi
+
 function usage(){
     echo "$SCRIPT_NAME"
     echo "Builds a docker image from the repository and pushes it to Docker Hub."
@@ -44,7 +52,7 @@ fi
 # This assumes that you are inside the root git folder.
 # TODO allow this to be run from anywhere.
 IMAGE_NAME=cscordero/chrisdoescoding.com:$TAG
-docker build -t $IMAGE_NAME .
+docker build -t $IMAGE_NAME $PROJECT_ROOT
 docker push $IMAGE_NAME
 
 docker tag $IMAGE_NAME cscordero/chrisdoescoding.com:latest

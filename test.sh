@@ -1,5 +1,5 @@
 set -e  # Exit immediately after first non-zero return value
-DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE || 'config.settings.local'
+export DJANGO_SETTINGS_MODULE=config.settings.local
 
 mypy chrisdoescoding --no-incremental
 flake8 chrisdoescoding --count
