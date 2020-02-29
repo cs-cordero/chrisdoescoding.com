@@ -1,0 +1,3 @@
+class Apps: ...
+
+apps = Apps()

@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css?family=Lora:400i|Montserrat|Muli|Inconsolata');
+
+html { height: 100%; min-height: 100%; }
+body {
+    height: 100%;
+    min-height: 100%;
+    font-family: 'Muli', sans-serif;
+    font-size: 18px;
+    line-height: 1.3em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    overflow-wrap: break-word;
+    margin-bottom: 15px;
+    line-height: 1.3em;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Lora', serif;
+}
+
+h1 { font-size: 48px; font-weight: bold; margin-bottom: unset; }
+h2 { font-size: 36px; margin-bottom: unset; }
+h3 { font-size: 28px; }
+h4 { font-size: 22px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+p { margin: 1em 0; overflow-wrap: break-word; }
+
+em { font-style: italic; }
+hr { border: none; border-bottom: 2px ridge #eaecef; }
+br { margin: 10px 0; }
+strong { font-weight: bold; }
+
+div ul, div ol { margin: 1em }
+ul { list-style: disc; }
+ul ul { list-style: circle; margin-top: 0; padding-left: 2em; }
+ul ul ul { list-style: square; margin-top: 0; padding-left: 4em; }
+ol { list-style: decimal; }
+ol ol { list-style: lower-roman; margin-top: 0; padding-left: 2em; }
+ol ol ol { list-style: lower-alpha; margin-top: 0; padding-left: 4em; }
+
+blockquote {
+    margin: 1em 0 1em 2em;
+    border-left: 2px solid rgb(0, 0, 0, .33);
+    padding-left: 1em;
+}
+
+blockquote, blockquote p {
+    font-family: 'Lora', serif;
+}
+
+code {
+    font-family: 'Inconsolata', monospace;
+    background-color: #F8B0B066;
+    padding: 0.1em;
+    font-size: inherit;
+}
+
+pre {
+    font-family: 'Inconsolata', monospace;
+    margin: 1em 2em;
+    background-color: #F8B0B066;
+    font-size: 17px;
+    padding: 10px 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre;
+}
+
+pre code {
+    font-family: 'Inconsolata', monospace;
+    padding: unset;
+    background-color: unset;
+}
+
+table {
+    table-layout: auto;
+    width: auto;
+    border-collapse: collapse;
+    border-spacing: 500px;
+    margin-bottom: 1em;
+}
+
+thead {
+    border-bottom: 1px solid rgb(0, 0, 0, 0.5);
+    font-weight: bold;
+}
+tbody { border-bottom: 2px double rgb(0, 0, 0, 0.5); }
+table tr td, table tr th { padding: 0.4em; }

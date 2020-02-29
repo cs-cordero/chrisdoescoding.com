@@ -1,0 +1,27 @@
+{% extends 'base_view.html' %}
+
+{% block content %}
+    <div class="bumper-left"></div>
+    <div class="content">
+        <h1>
+            {{ post.title }}
+        </h1>
+
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
+        <h3>
+            {{ post.publication_date|date:"M d, Y" }}
+        </h3>
+
+        <hr />
+
+        <div>
+            {{ markdown.html }}
+        </div>
+
+        {% include 'post_navigation.html' %}
+    </div>
+    <div class="bumper-right"></div>
+{% endblock %}

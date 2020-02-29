@@ -1,0 +1,9 @@
+*.pyc
+static/*
+dist/*
+envs
+static
+*.dmp
+*.gz
+.mypy_cache/*
+*/.mypy_cache/*

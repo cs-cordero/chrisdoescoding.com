@@ -1,0 +1,24 @@
+<div class="navigation">
+    {% if previous_post %}
+        <a href="/posts/{{ previous_post.pk }}">
+            <div class="navigation-item navigation-item-left navigation-item-active">
+                <span>Previous Post</span><br/>
+                <span>{{ previous_post.title }}</span>
+            </div>
+        </a>
+    {% else %}
+        <div class="navigation-item navigation-item-left navigation-item-disabled">
+        </div>
+    {% endif %}
+    {% if next_post %}
+        <a href="/posts/{{ next_post.pk }}">
+            <div class="navigation-item navigation-item-right navigation-item-active">
+                <span>Next Post</span><br/>
+                <span>{{ next_post.title }}</span>
+            </div>
+        </a>
+    {% else %}
+        <div class="navigation-item navigation-item-right navigation-item-disabled">
+        </div>
+    {% endif %}
+</div>
