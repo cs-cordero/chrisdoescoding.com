@@ -6,6 +6,7 @@ LISTVIEW_EXCERPT_LENGTH = 140
 
 INSTALLED_APPS = [
     "posts",
+    "acnh",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.messages",
