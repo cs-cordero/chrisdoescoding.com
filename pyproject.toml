@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chrisdoescoding.com"
-version = "1.4.1"
+version = "1.4.2"
 description = "\"ChrisDoesCoding.com\""
 authors = ["Christopher Cordero <ccordero@protonmail.com>"]
 
