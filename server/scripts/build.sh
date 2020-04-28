@@ -1,9 +1,11 @@
+#!/bin/bash
+
 SCRIPT_NAME=$(basename "$0")
 SCRIPTS_FOLDER=$(dirname "$0")
 PROJECT_ROOT=$SCRIPTS_FOLDER/../../
 
 if [[ ! -e "$PROJECT_ROOT/pyproject.toml" ]]; then
-    printf "E: $PROJECT_ROOT is not the project root.\n" >&2;
+    printf "E: %s is not the project root.\n" "$PROJECT_ROOT" >&2;
     exit 1
 fi
 
@@ -22,7 +24,7 @@ function usage(){
 function confirm() {
     while true
     do
-        read -p "$@ (y/n): " -n 1 -r
+        read -p "$* (y/n): " -n 1 -r
         echo    # (optional) move to a new line
         if [[ $REPLY =~ ^[Yy]$ ]]; then
             return 0
@@ -33,14 +35,14 @@ function confirm() {
 }
 
 TAG=
-for i in "$@"; do
-    case $i in
+while [[ $# -gt 0 ]]; do
+    case $1 in
         -h|--help)
             usage
             ;;
         -t=*|--tag=*)
             [[ -n "$TAG" ]] && usage
-            TAG="${i#*=}"
+            TAG="${1#*=}"
             shift
             ;;
         -t|--tag)
@@ -51,13 +53,13 @@ for i in "$@"; do
             ;;
         *)
             [[ -n "$TAG" ]] && usage
-            TAG="$i"
+            TAG="$1"
             shift
             ;;
     esac
 done
 
-if [[ -z "$TAG" ]] || [[ -z $(echo "$TAG" | grep 'v\d\+\.\d\+\.\d\+') ]]; then
+if ! grep -q 'v\d\+\.\d\+\.\d\+' <<< "$TAG"; then
     printf "E: A tag label with the format vX.Y.Z is required.\n" >&2;
     usage
 fi
@@ -80,22 +82,23 @@ confirm "Proceed with $TAG?"
 echo
 
 set -e
-if ! $(git diff-index --quiet HEAD); then
+if ! git diff-index --quiet HEAD; then
     echo "You have unstaged git changes.  Please stage or reset all changes."
     exit 1
 fi
-if [[ $(git rev-parse --abbrev-ref HEAD) -ne "master" ]]; then
-    echo "You are not checked out to the master branch."
+MASTER_BRANCH=master
+if [[ $(git rev-parse --abbrev-ref HEAD) -ne "$MASTER_BRANCH" ]]; then
+    echo "You are not checked out to the $MASTER_BRANCH branch."
     exit 1
 fi
 
 ./test.sh
 
-PATTERN=^version.*$
+PATTERN="^version.*$"
 gsed -i "0,/${PATTERN}/s/${PATTERN}/version = \"${TAG#v}\"/" pyproject.toml
 
-docker build -t $IMAGE_NAME $PROJECT_ROOT
-docker tag $IMAGE_NAME $LATEST_NAME
+docker build -t "$IMAGE_NAME" "$PROJECT_ROOT"
+docker tag "$IMAGE_NAME" "$LATEST_NAME"
 
 echo
 echo "Script will now perform the following commands:"
@@ -111,9 +114,9 @@ echo
 
 git add pyproject.toml
 git commit -m "Release $TAG"
-git tag -a $TAG -m "Release $TAG"
+git tag -a "$TAG" -m "Release $TAG"
 
-docker push $IMAGE_NAME
-docker push $LATEST_NAME
+docker push "$IMAGE_NAME"
+docker push "$LATEST_NAME"
 git push
-git push origin $TAG
+git push origin "$TAG"
