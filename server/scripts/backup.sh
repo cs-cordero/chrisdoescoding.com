@@ -86,7 +86,7 @@ fi
 
 
 TEMP_DIR="/tmp"
-BACKUP_FILE_NAME="$DB_NAME-backup-$(date +'%Y%m%d-%k%M%S')"
+BACKUP_FILE_NAME="$DB_NAME-backup-$(date +'%Y%m%d-%H%M%S')"
 
 pg_dump \
     --dbname="$DB_NAME" \
