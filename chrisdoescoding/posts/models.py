@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from django.conf import settings
 from django.db import models
 
@@ -7,6 +8,7 @@ from posts import utils
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     body = models.TextField()
+    excerpt = models.CharField(max_length=settings.LISTVIEW_EXCERPT_LENGTH)
     created = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     publication_date = models.DateTimeField(auto_now=False, null=True, blank=True)
@@ -20,19 +22,18 @@ class Post(models.Model):
         )
         return "{} {}".format(prefix, self.title)
 
-    @property
-    def excerpt(self) -> str:
-        excerpt_length: int = settings.LISTVIEW_EXCERPT_LENGTH
+    def save(self, *args, **kwargs) -> None:
+        self.excerpt = calculate_excerpt_from_markdown(self.body)
+        super().save(*args, **kwargs)
 
-        markdown_body: str = utils.MarkdownParser(self.body).html
-        first_p_tag_open = markdown_body.find("<p>")
-        first_p_tag_close = markdown_body.find("</p>")
 
-        if first_p_tag_open >= 0 and first_p_tag_close >= 0:
-            excerpt = markdown_body[first_p_tag_open + 3 : first_p_tag_close]
-            return (
-                f"{excerpt[:excerpt_length]}..."
-                if len(excerpt) > excerpt_length
-                else excerpt
-            )
-        return ""
+def calculate_excerpt_from_markdown(markdown: str) -> str:
+    excerpt_length = settings.LISTVIEW_EXCERPT_LENGTH
+
+    markdown_body: str = utils.MarkdownParser(markdown).html
+    soup_text: str = BeautifulSoup(markdown_body, "html.parser").text
+
+    if len(soup_text) > excerpt_length:
+        return f"{soup_text[:excerpt_length-3]}..."
+    else:
+        return soup_text

@@ -36,7 +36,7 @@ hr { border: none; border-bottom: 2px ridge #eaecef; }
 br { margin: 10px 0; }
 strong { font-weight: bold; }
 
-div ul, div ol { margin: 1em }
+div ul, div ol { margin-left: 2em; margin-bottom: 1em }
 ul { list-style: disc; }
 ul ul { list-style: circle; margin-top: 0; padding-left: 2em; }
 ul ul ul { list-style: square; margin-top: 0; padding-left: 4em; }
@@ -63,8 +63,7 @@ code {
 
 pre {
     font-family: 'Inconsolata', monospace;
-    margin: 1em 2em;
-    background-color: #F8B0B066;
+    margin: 1em 0.1em;
     font-size: 17px;
     padding: 10px 5px;
     overflow-x: auto;

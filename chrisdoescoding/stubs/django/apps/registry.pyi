@@ -1,3 +1,0 @@
-class Apps: ...
-
-apps = Apps()

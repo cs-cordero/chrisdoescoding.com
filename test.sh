@@ -24,6 +24,7 @@ function capture_stdout_and_stderr_if_successful {
 
 export DJANGO_SETTINGS_MODULE=config.settings.local
 export PYTHONPATH=chrisdoescoding
+export MYPYPATH=chrisdoescoding/stubs
 
 capture_stdout_and_stderr_if_successful mypy chrisdoescoding --no-incremental
 capture_stdout_and_stderr_if_successful flake8 chrisdoescoding --count

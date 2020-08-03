@@ -5,7 +5,7 @@ from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone
 
-from posts.models import Post
+from posts.models import Post, calculate_excerpt_from_markdown
 
 
 class FakeMarkdownParser:
@@ -132,3 +132,9 @@ class TestView(TestCase):
             self.assertContains(response, published_post.body)
             self.assertEqual(response.status_code, 200)
             self.assertEqual(response["content-type"], "text/plain")
+
+    def test_excerpt_calculation(self):
+        assert calculate_excerpt_from_markdown(self.post_4.body) == self.post_4.excerpt
+        assert (
+            calculate_excerpt_from_markdown("[Google](https://google.com)") == "Google"
+        )

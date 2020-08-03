@@ -11,6 +11,7 @@ psycopg2-binary = "^2.8"
 requests = "^2.22"
 py-gfm = "^0.1.4"
 gunicorn = "^19.9"
+beautifulsoup4 = "^4.9.1"
 
 [tool.poetry.dev-dependencies]
 mypy = "0.760"

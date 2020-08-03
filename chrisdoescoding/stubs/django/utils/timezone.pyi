@@ -1,3 +1,0 @@
-import datetime
-
-def now() -> datetime.datetime: ...
