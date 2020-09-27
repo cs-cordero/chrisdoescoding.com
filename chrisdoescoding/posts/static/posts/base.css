@@ -38,11 +38,11 @@ strong { font-weight: bold; }
 
 div ul, div ol { margin-left: 2em; margin-bottom: 1em }
 ul { list-style: disc; }
-ul ul { list-style: circle; margin-top: 0; padding-left: 2em; }
-ul ul ul { list-style: square; margin-top: 0; padding-left: 4em; }
+ul ul { list-style: circle; margin-top: 0; padding-left: 0em; }
+ul ul ul { list-style: square; margin-top: 0; padding-left: 1em; }
 ol { list-style: decimal; }
-ol ol { list-style: lower-roman; margin-top: 0; padding-left: 2em; }
-ol ol ol { list-style: lower-alpha; margin-top: 0; padding-left: 4em; }
+ol ol { list-style: lower-roman; margin-top: 0; padding-left: 0em; }
+ol ol ol { list-style: lower-alpha; margin-top: 0; padding-left: 1em; }
 
 blockquote {
     margin: 1em 0 1em 2em;
