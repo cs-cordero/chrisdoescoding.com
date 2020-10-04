@@ -19,9 +19,20 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 
+kb_patterns = [
+    # The Knowledge Base (Kb) is served by Nginx, everything is static.
+    # The entry point of the Kb is the static file index.html, which is why we
+    # redirect to it here.
+    path("", RedirectView.as_view(url="index.html"), name="kb"),
+    # If Nginx is mis-configured, then this route will get hit.
+    # This is an error, just redirect to home.
+    path("index.html", RedirectView.as_view(pattern_name="home"), name="kb_missing"),
+]
+
 urlpatterns = [
     path("", RedirectView.as_view(url="/posts/latest"), name="home"),
     path("posts/", include("posts.urls")),
     path("acnh/", include("acnh.urls")),
     path("admin/", admin.site.urls),
+    path("kb/", include(kb_patterns)),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -3,8 +3,10 @@
 static/*
 dist/*
 envs
+test_envs
 static
 *.dmp
 *.gz
 .mypy_cache/*
 */.mypy_cache/*
+.idea
