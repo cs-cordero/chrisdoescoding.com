@@ -32,4 +32,5 @@ urlpatterns = [
     path("acnh/", include("acnh.urls")),
     path("admin/", admin.site.urls),
     path("kb/", include(kb_patterns)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # type: ignore
